@@ -1,12 +1,9 @@
-<script>
-	import Nav from "$lib/Nav.svelte";
-
+<script lang="ts">
+	import '../app.css';
 </script>
 
-<header>
-    <Nav />
-</header>
+<header>Logo</header>
 
 <main>
-    <slot />
+	<slot />
 </main>

@@ -1,0 +1,10 @@
+body {
+  display: flex;
+  flex-flow: column nowrap;
+
+  align-items: center;
+}
+
+body > * {
+  width: 40rem;
+}
