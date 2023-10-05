@@ -1,10 +1,18 @@
-body {
-  display: flex;
-  flex-flow: column nowrap;
+/* Write your global styles here, in PostCSS syntax */
+@import "normalize.css";
 
-  align-items: center;
+body {
+	display: flex;
+	flex-flow: column nowrap;
+
+	align-items: center;
 }
 
 body > * {
-  width: 40rem;
+	width: 40rem;
+}
+
+button {
+  background: rgb(205, 222, 255);
+  border: none;
 }

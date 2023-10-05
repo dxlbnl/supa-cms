@@ -1,19 +1,69 @@
 <script lang="ts">
+	import type { Editor, Content } from '@tiptap/core';
+	import { EditorTheme, SvelteEditor } from '@nextlint/svelte';
+
+	import { writable } from 'svelte/store';
+	import { Pencil, Store } from 'lucide-svelte';
+
 	import type { PageData } from './$types.js';
-	import Editor from '$lib/Editor.svelte';
+	import Toggle from '$lib/components/Toggle.svelte';
+	import Doc from '$lib/blocks/Doc.svelte';
 
 	export let data: PageData;
 
-	let { page } = data;
+	let editor: Editor;
+
+	const { page } = data;
+
+	let edit = writable(false);
+
+	const handleUpload = async (file: File) => {
+		// handle upload here
+		const blob = new Blob([file]);
+		const previewUrl = URL.createObjectURL(blob);
+		return previewUrl;
+	};
+
+	const setEditor = (newEditor: Editor) => {
+		editor = newEditor;
+		console.log(editor.schema);
+	};
 </script>
 
-<
+<Toggle pressed={edit}>
+	<Pencil />
+</Toggle>
 
 <form method="POST" action="?/update">
-	<h1 contenteditable bind:innerHTML={page.title}>{page.title}</h1>
-	<input type="hidden" name="title" value={page.title} />
+	{#if $edit}
+		<input name="title" value={page.title} />
 
-	<Editor name="content" value={page.content} />
+		<input type="hidden" name="content" value={JSON.stringify(editor?.getJSON())} />
+
+		<EditorTheme>
+			<SvelteEditor
+				options={{ editable: false }}
+				content={page.content}
+				placeholder="Type '/' for help"
+				onCreated={setEditor}
+				onChange={setEditor}
+				plugins={{
+					selectImage: {
+						handleUpload,
+						unsplash: {
+							accessKey: 'pv6LPw4V559iu77TAahfqfmv9d71IzspVH_JVNvGm9A'
+						}
+					}
+				}}
+			/>
+		</EditorTheme>
+	{:else}
+		{#if page.title}
+			<h1>{page.title}</h1>
+		{/if}
+
+		<Doc {...page.content} />
+	{/if}
 
 	<section class="footer">
 		<button type="submit">Save</button>
