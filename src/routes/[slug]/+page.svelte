@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Editor, Content } from '@tiptap/core';
+	import type { Editor } from '@tiptap/core';
 	import { EditorTheme, SvelteEditor } from '@nextlint/svelte';
 
 	import { writable } from 'svelte/store';
@@ -7,7 +7,7 @@
 
 	import type { PageData } from './$types.js';
 	import Toggle from '$lib/components/Toggle.svelte';
-	import Doc from '$lib/blocks/Doc.svelte';
+	import Content from '$lib/blocks/Content.svelte';
 
 	export let data: PageData;
 
@@ -26,7 +26,6 @@
 
 	const setEditor = (newEditor: Editor) => {
 		editor = newEditor;
-		console.log(editor.schema);
 	};
 </script>
 
@@ -42,7 +41,6 @@
 
 		<EditorTheme>
 			<SvelteEditor
-				options={{ editable: false }}
 				content={page.content}
 				placeholder="Type '/' for help"
 				onCreated={setEditor}
@@ -62,7 +60,7 @@
 			<h1>{page.title}</h1>
 		{/if}
 
-		<Doc {...page.content} />
+		<Content content={page.content} />
 	{/if}
 
 	<section class="footer">

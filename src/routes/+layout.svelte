@@ -1,9 +1,9 @@
 <script lang="ts">
-	import '../app.css';
+	import { SvelteUIProvider } from '@svelteuidev/core';
 </script>
 
-<header>Logo</header>
-
-<main>
-	<slot />
-</main>
+<SvelteUIProvider themeObserver="dark">
+	<main>
+		<slot />
+	</main>
+</SvelteUIProvider>

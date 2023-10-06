@@ -20,12 +20,21 @@ dependencies:
   '@editorjs/quote':
     specifier: ^2.5.0
     version: 2.5.0
+  '@nextlint/core':
+    specifier: ^1.2.0
+    version: 1.2.0
   '@nextlint/svelte':
     specifier: ^1.1.2
     version: 1.1.2(sass@1.68.0)(svelte@3.59.2)
   '@supabase/supabase-js':
     specifier: ^2.37.0
     version: 2.37.0
+  '@svelteuidev/composables':
+    specifier: ^0.15.3
+    version: 0.15.3(svelte@3.59.2)
+  '@svelteuidev/core':
+    specifier: ^0.15.3
+    version: 0.15.3(@svelteuidev/composables@0.15.3)(svelte@3.59.2)
   '@tiptap/core':
     specifier: ^2.1.11
     version: 2.1.11(@tiptap/pm@2.1.11)
@@ -38,6 +47,9 @@ dependencies:
   '@tiptap/extension-text':
     specifier: ^2.1.11
     version: 2.1.11(@tiptap/core@2.1.11)
+  '@tiptap/starter-kit':
+    specifier: ^2.1.11
+    version: 2.1.11(@tiptap/pm@2.1.11)
   drizzle-orm:
     specifier: ^0.28.6
     version: 0.28.6(pg@8.11.3)(postgres@3.3.5)
@@ -788,6 +800,14 @@ packages:
       svelte: 4.2.1
     dev: false
 
+  /@svelteuidev/composables@0.15.3(svelte@3.59.2):
+    resolution: {integrity: sha512-Koa8oFH/jXXKeNqPxB56fvYBHBcCYgmC2jzKv826z6IAugMMBnc0w//nSmPLQUnhL60jg/5DbS5jzpofVnrR8w==}
+    peerDependencies:
+      svelte: '>=3.55.0'
+    dependencies:
+      svelte: 3.59.2
+    dev: false
+
   /@svelteuidev/core@0.13.0(@svelteuidev/composables@0.13.0)(svelte@3.59.2):
     resolution: {integrity: sha512-Jtl8J8leUkEHTpLQsJ5Rgeb0CqTAcn4ol656bqLjy/ZMLCpaRP867E5W31htLn7BxOVLpUe9QKpiuoTz7nHLcQ==}
     peerDependencies:
@@ -810,6 +830,18 @@ packages:
       '@stitches/core': 1.2.8
       '@svelteuidev/composables': 0.13.0(svelte@4.2.1)
       svelte: 4.2.1
+    dev: false
+
+  /@svelteuidev/core@0.15.3(@svelteuidev/composables@0.15.3)(svelte@3.59.2):
+    resolution: {integrity: sha512-9Gg8UsWKptq0vN+w87MI4vgowd1W4w9YB0OB9hk3iBH0AoCMh/R0hwTwLOV3/arFnf+YHZp99nzfj86GEnA0LQ==}
+    peerDependencies:
+      '@svelteuidev/composables': 0.15.3
+      svelte: '>=3.55.0'
+    dependencies:
+      '@floating-ui/dom': 1.2.8
+      '@stitches/core': 1.2.8
+      '@svelteuidev/composables': 0.15.3(svelte@3.59.2)
+      svelte: 3.59.2
     dev: false
 
   /@tiptap/core@2.1.11(@tiptap/pm@2.1.11):
@@ -877,6 +909,16 @@ packages:
       '@tiptap/pm': 2.1.11
     dev: false
 
+  /@tiptap/extension-code-block@2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11):
+    resolution: {integrity: sha512-QhmhCCWqg/5qLXpZ3sl2A0rqJqV8zMOegcxUFaqcJMOqNbsuHcRgc9C+1hWSVLbCmstB7M6sgF02QpTBOkYHxg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.11(@tiptap/pm@2.1.11)
+      '@tiptap/pm': 2.1.11
+    dev: false
+
   /@tiptap/extension-code@2.1.11(@tiptap/core@2.1.11):
     resolution: {integrity: sha512-G0UEbMFunujy/F86yHN0/dumPLbwTis9C+6IQv1XRPNsV28U0MgxBhlPcJUgyO5lwuleePDxiBVcRv2XrysgKw==}
     peerDependencies:
@@ -916,6 +958,16 @@ packages:
 
   /@tiptap/extension-focus@2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11):
     resolution: {integrity: sha512-suAtZphGdKuHdetLGTNH99oH7/LVKfv4kBFm8HyNAFLflh2tf6KCWI5ka840Aq3IFYtnMkwbMgxTx4bz3OsfEg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.11(@tiptap/pm@2.1.11)
+      '@tiptap/pm': 2.1.11
+    dev: false
+
+  /@tiptap/extension-gapcursor@2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11):
+    resolution: {integrity: sha512-P/xjyhSOVyop5XXbNtRPgrooQrSlpYblwR67ClI9FAC7uQliuOwi5VcndmEItjWWSe85kJa2IHjOS7mLYvJe8A==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
       '@tiptap/pm': ^2.0.0
@@ -1069,6 +1121,32 @@ packages:
       prosemirror-trailing-node: 2.0.7(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.0)
       prosemirror-transform: 1.8.0
       prosemirror-view: 1.32.0
+    dev: false
+
+  /@tiptap/starter-kit@2.1.11(@tiptap/pm@2.1.11):
+    resolution: {integrity: sha512-kZXwuo9yxrs1ASxluRKjXThjdcy90d7owJxnJWD7SyEwXaXYc4h+Ar1M9rP3jieCDBuRTtCgvAOKbVbhnRJ2jg==}
+    dependencies:
+      '@tiptap/core': 2.1.11(@tiptap/pm@2.1.11)
+      '@tiptap/extension-blockquote': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-bold': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-bullet-list': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-code': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-code-block': 2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11)
+      '@tiptap/extension-document': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-dropcursor': 2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11)
+      '@tiptap/extension-gapcursor': 2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11)
+      '@tiptap/extension-hard-break': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-heading': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-history': 2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11)
+      '@tiptap/extension-horizontal-rule': 2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11)
+      '@tiptap/extension-italic': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-list-item': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-ordered-list': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-paragraph': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-strike': 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-text': 2.1.11(@tiptap/core@2.1.11)
+    transitivePeerDependencies:
+      - '@tiptap/pm'
     dev: false
 
   /@tiptap/suggestion@2.1.11(@tiptap/core@2.1.11)(@tiptap/pm@2.1.11):
