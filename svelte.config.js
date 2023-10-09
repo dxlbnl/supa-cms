@@ -1,5 +1,3 @@
-import { preprocessMeltUI } from '@melt-ui/pp';
-import sequence from 'svelte-sequential-preprocessor';
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
@@ -7,7 +5,7 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: sequence([vitePreprocess(), preprocessMeltUI()]),
+	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter(),
 		alias: {

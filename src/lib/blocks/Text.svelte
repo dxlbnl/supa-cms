@@ -12,10 +12,6 @@
 </script>
 
 <script lang="ts">
-	import Content from './Content.svelte';
-
-	export let type: string;
-
 	export let marks: NonNullable<JSONContent['marks']>;
 	export let text: NonNullable<JSONContent['text']>;
 

@@ -4,12 +4,14 @@
 	import Element, { isElementType } from './Element.svelte';
 	import Text from './Text.svelte';
 	import CodeBlock from './CodeBlock.svelte';
+	import Layout from '../../routes/+layout.svelte';
 
 	export let content: JSONContent;
 
 	const components: Record<string, ComponentType> = {
 		text: Text,
-		codeBlock: CodeBlock
+		codeBlock: CodeBlock,
+		layout: Layout
 	};
 
 	const hasComponent = (type?: string): type is keyof typeof components =>

@@ -2,9 +2,35 @@
 	import StarterKit from '@tiptap/starter-kit';
 	import { Editor } from '@tiptap/core';
 	import { onMount } from 'svelte';
-	import { Button, Group } from '@svelteuidev/core';
 
+	import { Button } from '$lib/components';
+
+	import { Node } from '@tiptap/core';
 	import Content from '$lib/blocks/Content.svelte';
+
+	const Layout = Node.create({
+		name: 'layout',
+
+		content: 'block*',
+
+		group: 'block',
+
+		renderHTML: () => {
+			return [
+				'div',
+				{
+					class: 'layout'
+				},
+				0
+			];
+		},
+		parseHTML: () => [
+			{
+				tag: 'div.layout'
+			}
+		],
+		defining: true
+	});
 
 	let element: HTMLDivElement;
 	let editor: Editor;
@@ -12,7 +38,7 @@
 	onMount(() => {
 		editor = new Editor({
 			element: element,
-			extensions: [StarterKit],
+			extensions: [Layout, StarterKit],
 			content: `
             <h2>
               Hi there,
@@ -20,6 +46,10 @@
             <p>
               this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
             </p>
+            <div class='layout'>
+              <p>Hi</p>
+              <p>there</p>
+            </div>
             <ul>
               <li>
                 That’s a bullet list with one …
@@ -57,7 +87,7 @@
 	<section>
 		{#if editor}
 			<div>
-				<Group spacing="xs">
+				<section class="menu">
 					<Button
 						compact
 						on:click={() => editor.chain().focus().toggleBold().run()}
@@ -193,7 +223,7 @@
 					>
 						redo
 					</Button>
-				</Group>
+				</section>
 			</div>
 		{/if}
 		<div bind:this={element} />
@@ -216,5 +246,10 @@
 
 	pre {
 		white-space: break-spaces;
+	}
+
+	.menu {
+		display: flex;
+		flex-flow: wrap;
 	}
 </style>
