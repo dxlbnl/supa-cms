@@ -1,26 +1,42 @@
 <script lang="ts">
 	import StarterKit from '@tiptap/starter-kit';
-	import { Node, Editor } from '@tiptap/core';
-	import Image from '@tiptap/extension-image';
+	import { Node, Editor, mergeAttributes } from '@tiptap/core';
+	import { Image } from './Image';
 	import { getContext, onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import { css } from 'styled-system/css';
 
 	const editor = getContext<Writable<Editor>>('editor');
+
+	const Section = Node.create({
+		name: 'section',
+
+		content: 'block*',
+		isolating: true,
+
+		group: 'block',
+
+		renderHTML: () => ['section', 0],
+
+		parseHTML: () => [
+			{
+				tag: 'section'
+			}
+		]
+	});
 
 	const Layout = Node.create({
 		name: 'layout',
 
-		content: 'block block',
+		content: 'image section',
 
 		group: 'block',
 
-		renderHTML: () => {
+		renderHTML: ({ HTMLAttributes }) => {
 			return [
 				'div',
-				{
+				mergeAttributes(HTMLAttributes, {
 					class: 'layout'
-				},
+				}),
 				0
 			];
 		},
@@ -36,7 +52,7 @@
 	onMount(() => {
 		$editor = new Editor({
 			element: element,
-			extensions: [Image, Layout, StarterKit],
+			extensions: [Image, Section, Layout, StarterKit],
 			content: `
           <h2>
             Hi there,
@@ -45,7 +61,7 @@
             this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
           </p>
           <div class='layout'>
-            <p>Hi</p>
+            <img src='https://veesqakrutpzcryhdhrx.supabase.co/storage/v1/object/public/media/not-google.png' />
             <p>there</p>
           </div>
           <ul>

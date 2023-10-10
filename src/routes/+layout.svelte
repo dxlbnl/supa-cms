@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '@fontsource/inconsolata';
 	import '@fontsource/alfa-slab-one';
 	import '@fontsource-variable/open-sans';
 

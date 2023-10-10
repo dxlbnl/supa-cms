@@ -23,6 +23,12 @@ const textStyles = defineTextStyles({
 			textDecoration: 'None',
 			textTransform: 'None'
 		}
+	},
+	code: {
+		value: {
+			fontFamily: 'Inconsolata',
+			fontSize: '.7rem'
+		}
 	}
 });
 
@@ -65,6 +71,16 @@ const globalCss = defineGlobalStyles({
 	'.content ul': {
 		listStyle: 'disc',
 		marginLeft: '1rem'
+	},
+
+	'pre, code': {
+		textStyle: 'code'
+	},
+
+	'.layout': {
+		display: 'grid',
+		gridTemplateColumns: 'repeat(2, 1fr)',
+		gridGap: '1em'
 	}
 });
 

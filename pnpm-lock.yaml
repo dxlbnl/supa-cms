@@ -11,6 +11,9 @@ dependencies:
   '@fontsource/alfa-slab-one':
     specifier: ^5.0.15
     version: 5.0.15
+  '@fontsource/inconsolata':
+    specifier: ^5.0.13
+    version: 5.0.13
   '@supabase/supabase-js':
     specifier: ^2.37.0
     version: 2.37.0
@@ -993,6 +996,10 @@ packages:
 
   /@fontsource/alfa-slab-one@5.0.15:
     resolution: {integrity: sha512-HAdN36ugcCDszOqVY3TINJg3lLVTCEQxnBviLzJmaQN1Xf19h9e9rChoS2LLRF5XO/7TmNb4HgeXsPWAv5mm6Q==}
+    dev: false
+
+  /@fontsource/inconsolata@5.0.13:
+    resolution: {integrity: sha512-9xLGgGhN5X4q3T4XnKCu8bE9t1/f1AF5GhxRhhUhEu0ji32/mhyY9yx7rIwGUupjelS7xjCl7RlA20ZJcZ/9uQ==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:

@@ -4,7 +4,7 @@
 	import Element, { isElementType } from './Element.svelte';
 	import Text from './Text.svelte';
 	import CodeBlock from './CodeBlock.svelte';
-	import Layout from '../../routes/+layout.svelte';
+	import Layout from './Layout.svelte';
 
 	export let content: JSONContent;
 

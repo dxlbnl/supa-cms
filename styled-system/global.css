@@ -93,4 +93,15 @@
     list-style: disc;
     margin-left: 1rem
     }
+
+  pre, code {
+    font-family: Inconsolata;
+    font-size: .7rem
+    }
+
+  .layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1em
+    }
 }

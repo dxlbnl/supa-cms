@@ -9,7 +9,9 @@
 		listItem: 'li',
 		blockquote: 'blockquote',
 		hardBreak: 'br',
-		horizontalRule: 'hr'
+		horizontalRule: 'hr',
+		image: 'img',
+		section: 'section'
 	};
 	const getElementTag = ({ type, attrs }: JSONContent): string => {
 		if (type === 'heading' && attrs) {

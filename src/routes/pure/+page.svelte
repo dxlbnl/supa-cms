@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Editor as TEditor } from '@tiptap/core';
 
-	import { cx } from 'styled-system/css';
-	import { container, grid, wrap } from 'styled-system/patterns';
+	import { css, cx } from 'styled-system/css';
+	import { container, grid, gridItem, wrap } from 'styled-system/patterns';
 
 	import Content from '$lib/blocks/Content.svelte';
 	import EditorContext from '$lib/editor/EditorContext.svelte';
@@ -24,25 +24,18 @@
 	)}
 >
 	<EditorContext bind:editor>
+		<Menu class={gridItem({ colSpan: 2 })} />
+
 		<section>
-			<Menu />
 			<Editor />
 		</section>
+
+		<section class="content">
+			{#if content}
+				<Content {content} />
+
+				<pre>{JSON.stringify(content, null, 2)}</pre>
+			{/if}
+		</section>
 	</EditorContext>
-
-	<section>
-		{#if content}
-			<Content {content} />
-
-			<pre>{JSON.stringify(content, null, 2)}</pre>
-		{/if}
-	</section>
 </article>
-
-<style>
-	:global(.layout) {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		grid-gap: 1em;
-	}
-</style>

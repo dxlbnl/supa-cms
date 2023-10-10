@@ -1,16 +1,32 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import { uploadImage } from '$lib/supabaseClient';
 	import type { Editor } from '@tiptap/core';
+	import { cx } from 'styled-system/css';
 
 	import { wrap } from 'styled-system/patterns';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
+	let cls: string;
+	export { cls as class };
+
 	const editor = getContext<Writable<Editor>>('editor');
+
+	const handleImage = async (event: Event) => {
+		const target = event.target as HTMLInputElement;
+		if (!target.files?.length) return;
+
+		const url = await uploadImage(target.files[0]);
+
+		// const blob = new Blob([target.files[0]]);
+		// const previewUrl = URL.createObjectURL(blob);
+		$editor.chain().focus().setImage({ src: url }).run();
+	};
 </script>
 
 {#if $editor}
-	<section class={wrap({ direction: 'row' })}>
+	<section class={cx(cls, wrap({ direction: 'row' }))}>
 		<Button
 			compact
 			on:click={() => $editor.chain().focus().toggleBold().run()}
@@ -143,12 +159,11 @@
 		>
 			redo
 		</Button>
-		<Button
-			compact
-			on:click={() => $editor.chain().focus().setImage({ src: '/image.jpg' }).run()}
+		<input
+			type="file"
+			accept="image/*"
+			on:change={handleImage}
 			disabled={!$editor.can().chain().focus().setImage({ src: '/image.jpg' }).run()}
-		>
-			Image
-		</Button>
+		/>
 	</section>
 {/if}
