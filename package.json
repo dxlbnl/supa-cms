@@ -12,7 +12,8 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"generate": "drizzle-kit generate:pg",
 		"push": "drizzle-kit push:pg",
-		"studio": "drizzle-kit studio"
+		"studio": "drizzle-kit studio",
+		"prepare": "panda codegen"
 	},
 	"devDependencies": {
 		"@pandacss/dev": "^0.15.5",
@@ -37,15 +38,18 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource-variable/open-sans": "^5.0.16",
+		"@fontsource/alfa-slab-one": "^5.0.15",
 		"@supabase/supabase-js": "^2.37.0",
 		"@tiptap/core": "^2.1.11",
 		"@tiptap/extension-document": "^2.1.11",
+		"@tiptap/extension-image": "^2.1.11",
 		"@tiptap/extension-paragraph": "^2.1.11",
 		"@tiptap/extension-text": "^2.1.11",
 		"@tiptap/starter-kit": "^2.1.11",
 		"drizzle-orm": "^0.28.6",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"lucide-svelte": "^0.279.0",
-		"normalize.css": "^8.0.1",
 		"pg": "^8.11.3",
 		"postgres": "^3.3.5"
 	},

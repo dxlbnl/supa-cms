@@ -1,18 +1,1 @@
-/* Write your global styles here, in PostCSS syntax */
-@import "normalize.css";
-
-body {
-	display: flex;
-	flex-flow: column nowrap;
-
-	align-items: center;
-}
-
-body > * {
-	width: 40rem;
-}
-
-button {
-  background: rgb(205, 222, 255);
-  border: none;
-}
+@layer reset, base, tokens, recipes, utilities;
