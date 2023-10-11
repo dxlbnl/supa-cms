@@ -36,22 +36,29 @@
 
   html, body {
     font-family: Open Sans Variable;
+    font-weight: 500;
     font-size: 16;
     line-height: 1.5;
-    color: var(--colors-gray-900)
-    }
-
-  html, body,h1,h2,h3,h4,h5,h6 {
-    font-weight: 500;
     letter-spacing: 0;
     text-decoration: None;
-    text-transform: None
+    text-transform: None;
+    color: var(--colors-gray-900);
+    background-color: var(--colors-gray-100)
+    }
+
+  body {
+    display: flex;
+    justify-content: center
     }
 
   h1,h2,h3,h4,h5,h6 {
     font-family: Alfa Slab One;
+    font-weight: 500;
     font-size: 1.5rem;
     line-height: 1.5rem;
+    letter-spacing: 0;
+    text-decoration: None;
+    text-transform: None;
     margin: .5rem 0
     }
 
@@ -103,5 +110,12 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em
+    }
+
+  button {
+    background-color: var(--colors-gray-300);
+    border-radius: var(--radii-md);
+    padding: var(--spacing-2);
+    margin-block: var(--spacing-2)
     }
 }

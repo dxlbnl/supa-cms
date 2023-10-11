@@ -36,7 +36,12 @@ const globalCss = defineGlobalStyles({
 	'html, body': {
 		textStyle: 'body',
 		color: 'gray.900',
+		backgroundColor: 'gray.100',
 		lineHeight: '1.5'
+	},
+	body: {
+		display: 'flex',
+		justifyContent: 'center'
 	},
 	'h1,h2,h3,h4,h5,h6': {
 		textStyle: 'heading',
@@ -81,6 +86,13 @@ const globalCss = defineGlobalStyles({
 		display: 'grid',
 		gridTemplateColumns: 'repeat(2, 1fr)',
 		gridGap: '1em'
+	},
+
+	button: {
+		backgroundColor: 'gray.300',
+		rounded: 'md',
+		p: 2,
+		my: 2
 	}
 });
 
