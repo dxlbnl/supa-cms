@@ -8,7 +8,7 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
-	let cls: string;
+	let cls: string | undefined = undefined;
 	export { cls as class };
 
 	const editor = getContext<Writable<Editor>>('editor');

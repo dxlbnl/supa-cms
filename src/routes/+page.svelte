@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Editor, Content } from '@tiptap/core';
-	import { EditorTheme, SvelteEditor } from '@nextlint/svelte';
 
 	let editor: Editor;
 
@@ -18,22 +17,3 @@
 
 	let content: Content = '';
 </script>
-
-<EditorTheme>
-	<SvelteEditor
-		bind:content
-		placeholder="Type '/' for help"
-		onCreated={setEditor}
-		onChange={setEditor}
-		plugins={{
-			selectImage: {
-				handleUpload,
-				unsplash: {
-					accessKey: 'pv6LPw4V559iu77TAahfqfmv9d71IzspVH_JVNvGm9A'
-				}
-			}
-		}}
-	/>
-</EditorTheme>
-
-<pre>{JSON.stringify(content, null, 2)}</pre>
