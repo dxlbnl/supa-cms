@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import { uploadImage } from '$lib/supabaseClient';
+	import { updatePage, uploadImage } from '$lib/supabaseClient';
 	import type { Editor } from '@tiptap/core';
 	import { fly } from 'svelte/transition';
 
@@ -26,13 +26,15 @@
 		Heading6,
 		Check,
 		AlignJustify,
-		ChevronDown
+		ChevronDown,
+		Save
 	} from 'lucide-svelte';
 	import { css, cx } from 'styled-system/css';
 
 	import { hstack, stack, vstack, wrap } from 'styled-system/patterns';
 	import { type SvelteComponent, getContext } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
+	import { page } from '$app/stores';
 
 	let cls: string | undefined = undefined;
 	export { cls as class };
@@ -84,6 +86,9 @@
 		// const blob = new Blob([target.files[0]]);
 		// const previewUrl = URL.createObjectURL(blob);
 		$editor.chain().focus().setImage({ src: url }).run();
+	};
+	const handleSave = async () => {
+		updatePage({ slug: $page.params.slug || 'index', content: $editor.getJSON() });
 	};
 
 	const {
@@ -274,5 +279,7 @@
 			/>
 			<Image />
 		</Button>
+
+		<Button class={css({ colorPalette: 'green', ml: 8 })} on:click={handleSave}><Save /></Button>
 	</section>
 {/if}

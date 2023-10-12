@@ -63,7 +63,7 @@ export async function updatePage({
 		console.error('error updating page', error);
 		throw error;
 	} else {
-		console.log('page updated', data);
+		console.log('page updated', slug, content);
 		// Handle success
 	}
 }

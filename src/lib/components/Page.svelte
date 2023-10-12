@@ -11,6 +11,7 @@
 	import { updatePage } from '$lib/supabaseClient';
 
 	let editor: Writable<TEditor>;
+
 	export let slug: string;
 	export let content: JSONContent;
 </script>
@@ -19,24 +20,10 @@
 	<Menu />
 
 	{#key slug}
-		<Editor bind:content />
+		<Editor slot="editor" {content} />
 	{/key}
 
 	{#if !$editor && content}
-		<Content {content} />
-	{/if}
-
-	{#if $editor}
-		<section
-			class="footer"
-			style={css({
-				background: 'green.500',
-				position: 'sticky',
-				bottom: 0,
-				p: 16
-			})}
-		>
-			<button on:click={() => updatePage({ slug, content })}>Save</button>
-		</section>
+		<Content slot="content" {content} />
 	{/if}
 </EditorContext>
