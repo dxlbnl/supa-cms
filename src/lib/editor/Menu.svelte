@@ -1,8 +1,11 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import Dropdown from '$lib/components/Dropdown.svelte';
 	import { uploadImage } from '$lib/supabaseClient';
 	import type { Editor } from '@tiptap/core';
+	import { fly } from 'svelte/transition';
+
+	import { createSelect, melt } from '@melt-ui/svelte';
+
 	import {
 		Bold,
 		Italic,
@@ -20,13 +23,16 @@
 		Heading3,
 		Heading4,
 		Heading5,
-		Heading6
+		Heading6,
+		Check,
+		AlignJustify,
+		ChevronDown
 	} from 'lucide-svelte';
 	import { css, cx } from 'styled-system/css';
 
-	import { stack, wrap } from 'styled-system/patterns';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { hstack, stack, vstack, wrap } from 'styled-system/patterns';
+	import { type SvelteComponent, getContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 
 	let cls: string | undefined = undefined;
 	export { cls as class };
@@ -35,76 +41,37 @@
 
 	const editor = getContext<Writable<Editor>>('editor');
 
-	const textNodes = [
-		{
-			name: 'paragraph',
-			icon: Text,
-			onSelect: () => {},
-			isSelected
+	const textOptions = ['p', 'h1', 'h2', 'h3', 'h4'] as const;
+	type TextOption = (typeof textOptions)[number];
+	type TextType = {
+		type: string;
+		attrs?: Record<string, any>;
+		icon: SvelteComponent;
+	};
+	const textConfig: Record<TextOption, TextType> = {
+		p: {
+			type: 'paragraph',
+			icon: Text
 		},
-		{
-			name: 'h1',
-			icon: Heading1,
-			onSelect: () => {},
-			isSelected
+		h1: {
+			type: 'heading',
+			attrs: { level: 1 },
+			icon: Heading1
 		},
-		{
-			name: 'h2',
-			icon: Heading2,
-			onSelect: () => {},
-			isSelected
+		h2: {
+			type: 'heading',
+			attrs: { level: 2 },
+			icon: Heading2
 		},
-		{
-			name: 'h3',
-			icon: Heading3,
-			onSelect: () => {},
-			isSelected
+		h3: {
+			type: 'heading',
+			attrs: { level: 3 },
+			icon: Heading3
 		},
-		{
-			name: 'h4',
-			icon: Heading4,
-			onSelect: () => {},
-			isSelected
-		},
-		{
-			name: 'h5',
-			icon: Heading5,
-			onSelect: () => {},
-			isSelected
-		},
-		{
-			name: 'h6',
-			icon: Heading6,
-			onSelect: () => {},
-			isSelected
-		}
-	];
-	const textNodes = ['paragraph', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
-	const setTextNode = (event: CustomEvent<string>): void => {
-		if (!(event.detail in textNodes)) return;
-
-		switch (event.detail) {
-			case 'paragraph':
-				() => $editor.chain().focus().setParagraph().run();
-				break;
-			case 'h1':
-				() => $editor.chain().focus().toggleHeading({ level: 1 }).run();
-				break;
-			case 'h2':
-				() => $editor.chain().focus().toggleHeading({ level: 2 }).run();
-				break;
-			case 'h3':
-				() => $editor.chain().focus().toggleHeading({ level: 3 }).run();
-				break;
-			case 'h4':
-				() => $editor.chain().focus().toggleHeading({ level: 4 }).run();
-				break;
-			case 'h5':
-				() => $editor.chain().focus().toggleHeading({ level: 5 }).run();
-				break;
-			case 'h6':
-				() => $editor.chain().focus().toggleHeading({ level: 6 }).run();
-				break;
+		h4: {
+			type: 'heading',
+			attrs: { level: 4 },
+			icon: Heading4
 		}
 	};
 
@@ -118,13 +85,53 @@
 		// const previewUrl = URL.createObjectURL(blob);
 		$editor.chain().focus().setImage({ src: url }).run();
 	};
+
+	const {
+		elements: { trigger, menu, option, label },
+		states: { selected, open },
+		helpers: { isSelected }
+	} = createSelect<TextOption>({
+		forceVisible: true,
+		positioning: {
+			placement: 'bottom',
+			fitViewport: true,
+			sameWidth: true
+		},
+		defaultSelected: { value: 'p' },
+		onSelectedChange({ curr, next }) {
+			if (shouldReact) {
+				console.log('change', curr, next);
+				const nextOption = textConfig[next.value];
+				$editor.chain().focus().setNode(nextOption.type, nextOption.attrs).run();
+			}
+
+			return next;
+		}
+	});
+	let shouldReact = true;
+
+	const onSelectionUpdate = ({ editor }: { editor: Editor }) => {
+		for (const option of textOptions) {
+			if (editor.isActive(textConfig[option].type, textConfig[option].attrs)) {
+				shouldReact = false;
+				selected.set({ value: option });
+				shouldReact = true;
+				break;
+			}
+		}
+	};
+	let listener = false;
+	$: if ($editor && !listener) {
+		listener = true;
+		$editor.on('selectionUpdate', onSelectionUpdate);
+	}
 </script>
 
 {#if $editor}
 	<section
 		class={cx(
 			cls,
-			stack({ direction: 'row', justifyContent: 'center' }),
+			stack({ direction: 'row', justifyContent: 'center', alignItems: 'start', gap: 2 }),
 			css({
 				position: 'fixed',
 				top: 0,
@@ -135,6 +142,72 @@
 			})
 		)}
 	>
+		<section>
+			<button
+				class={cx(
+					hstack({ gap: 0 }),
+					css({
+						p: 1
+					})
+				)}
+				use:melt={$trigger}
+			>
+				<ChevronDown />
+				<svelte:component this={textConfig[$selected.value].icon} />
+			</button>
+
+			{#if $open}
+				<ul
+					use:melt={$menu}
+					transition:fly
+					class={cx(
+						vstack({ gap: 1 }),
+						css({
+							zIndex: 20,
+							p: 1,
+							bg: 'white'
+						})
+					)}
+				>
+					{#each textOptions as item}
+						{@const config = textConfig[item]}
+						<li
+							use:melt={$option({ value: item })}
+							class={cx(
+								hstack({ gap: 0 }),
+								css({
+									position: 'relative',
+									rounded: 'md',
+									bg: 'gray.100',
+									p: 1,
+									pl: 6,
+									'&[data-highlighted]': {
+										bg: 'gray.200'
+									},
+									'&[data-selected]': {
+										bg: 'gray.300'
+									}
+								})
+							)}
+						>
+							{#if $isSelected(item)}
+								<Check
+									size={16}
+									class={css({
+										position: 'absolute',
+										left: 1,
+										top: '50%',
+										zIndex: 20,
+										translate: '0 calc(-50% + 1px)'
+									})}
+								/>
+							{/if}
+							<svelte:component this={config.icon} />
+						</li>{/each}
+				</ul>
+			{/if}
+		</section>
+
 		<Button
 			on:click={() => $editor.chain().focus().toggleBold().run()}
 			disabled={!$editor.can().chain().focus().toggleBold().run()}
@@ -156,14 +229,6 @@
 		>
 			<Strikethrough />
 		</Button>
-
-		<Dropdown items={textNodes} on:change={setTextNode} let:item>
-			<Button name={item}>
-				<svelte:component
-					this={{ paragraph: Text, h1: Heading1, h2: Heading2, h3: Heading3 }[item]}
-				/>
-			</Button>
-		</Dropdown>
 
 		<Button
 			on:click={() => $editor.chain().focus().toggleBulletList().run()}
