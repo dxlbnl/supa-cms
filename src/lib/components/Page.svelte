@@ -14,6 +14,10 @@
 
 	export let slug: string;
 	export let content: JSONContent;
+
+	$: {
+		console.log({ slug, content });
+	}
 </script>
 
 <EditorContext bind:editor>
