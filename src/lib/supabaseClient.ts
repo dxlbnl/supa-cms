@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import type { JSONContent } from '@tiptap/core';
 
 export const supabase = createClient(
 	'https://veesqakrutpzcryhdhrx.supabase.co',
@@ -24,4 +25,45 @@ export async function uploadImage(file: File) {
 	} = supabase.storage.from('media').getPublicUrl(file.name);
 
 	return publicUrl;
+}
+
+export async function fetchPage(slug: string) {
+	const { data } = await supabase.from('page').select('*').match({ slug }).single();
+	console.log('Fetch', slug, data);
+
+	return data;
+}
+
+export async function createPage(slug: string) {
+	const { data, error } = await supabase.from('page').insert([{ slug }]);
+
+	if (error) {
+		// Handle error
+		console.error('error creating page', error);
+		throw error;
+	} else {
+		console.log('page created', data);
+		// Handle success
+	}
+}
+
+export async function updatePage({
+	slug,
+	title,
+	content
+}: {
+	slug: string;
+	title?: string;
+	content: JSONContent;
+}) {
+	const { data, error } = await supabase.from('page').update({ title, content }).match({ slug });
+
+	if (error) {
+		// Handle error
+		console.error('error updating page', error);
+		throw error;
+	} else {
+		console.log('page updated', data);
+		// Handle success
+	}
 }

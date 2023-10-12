@@ -246,7 +246,7 @@
 			on:click={() => $editor.chain().focus().toggleBlockquote().run()}
 			active={$editor.isActive('blockquote')}
 		>
-			<Quote strokeWidth={1} />
+			<Quote strokeWidth={1} fill="black" stroke="none" />
 		</Button>
 		<Button compact on:click={() => $editor.chain().focus().setHardBreak().run()}>
 			<CornerDownLeft />

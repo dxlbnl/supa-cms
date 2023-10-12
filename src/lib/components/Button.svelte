@@ -6,7 +6,7 @@
 		'&[data-active="true"]': {
 			colorPalette: 'blue'
 		},
-		background: 'colorPalette.100',
+		background: 'colorPalette.200',
 		_hover: {
 			background: 'colorPalette.300'
 		},

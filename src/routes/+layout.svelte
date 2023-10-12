@@ -3,6 +3,8 @@
 	import '@fontsource/alfa-slab-one';
 	import '@fontsource-variable/open-sans';
 
+	import Navigation from '$lib/components/Navigation.svelte';
+
 	import '../app.css';
 	import { css, cx } from 'styled-system/css';
 	import { grid, gridItem } from 'styled-system/patterns';
@@ -36,27 +38,12 @@
 			PROJECT
 		</h1>
 
-		<nav>
-			<ul>
-				<li>
-					<a href="/">Home</a>
-				</li>
-				<li>
-					<a href="/about">About</a>
-				</li>
-				<li>
-					<a href="/tech">Tech</a>
-				</li>
-				<li>
-					<a href="/contact">Contact</a>
-				</li>
-			</ul>
-		</nav>
+		<Navigation />
 	</header>
 
 	<content
 		class={css({
-			p: 8,
+			p: 4,
 			pt: 32
 		})}
 	>
