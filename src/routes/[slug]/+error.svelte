@@ -4,7 +4,7 @@
 	import { css } from 'styled-system/css';
 </script>
 
-<h1 class={css({ textAlign: 'center', my: 20 })}>{$page.status}</h1>
+<h1 class={css({ textAlign: 'center', mb: 20 })}>{$page.status}</h1>
 <p>{$page.error?.message}</p>
 
 <form method="POST" action="?/create">

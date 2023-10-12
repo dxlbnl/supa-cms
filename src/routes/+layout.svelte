@@ -21,8 +21,11 @@
 >
 	<header
 		class={css({
+			position: 'sticky',
+			top: 0,
 			textAlign: 'right',
-			alignSelf: 'center'
+			pt: 32,
+			alignSelf: 'start'
 		})}
 	>
 		<h1
@@ -53,7 +56,8 @@
 
 	<content
 		class={css({
-			p: 8
+			p: 8,
+			pt: 32
 		})}
 	>
 		<slot />
