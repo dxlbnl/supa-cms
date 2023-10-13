@@ -27,10 +27,9 @@
 	} from 'lucide-svelte';
 	import { css, cx } from 'styled-system/css';
 
-	import { hstack, stack, vstack, wrap } from 'styled-system/patterns';
+	import { hstack, stack, vstack } from 'styled-system/patterns';
 	import { type SvelteComponent, getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import { page } from '$app/stores';
 	import Save from './menu/Save.svelte';
 
 	let cls: string | undefined = undefined;
@@ -45,7 +44,7 @@
 	type TextType = {
 		type: string;
 		attrs?: Record<string, any>;
-		icon: SvelteComponent;
+		icon: ConstructorOfATypedSvelteComponent;
 	};
 	const textConfig: Record<TextOption, TextType> = {
 		p: {
@@ -109,7 +108,8 @@
 	let shouldReact = true;
 
 	const onSelectionUpdate = ({ editor }: { editor: Editor }) => {
-		for (const option of textOptions) {
+		for (let i = 0; i < textOptions.length; i++) {
+			const option: TextOption = textOptions[i];
 			if (editor.isActive(textConfig[option].type, textConfig[option].attrs)) {
 				shouldReact = false;
 				selected.set({ value: option });
@@ -152,7 +152,7 @@
 				use:melt={$trigger}
 			>
 				<ChevronDown />
-				<svelte:component this={textConfig[$selected.value].icon} />
+				<svelte:component this={textConfig[$selected?.value || 'p'].icon} />
 			</button>
 
 			{#if $open}
