@@ -2,7 +2,7 @@
 	import StarterKit from '@tiptap/starter-kit';
 	import { Node, Editor, mergeAttributes, type Content } from '@tiptap/core';
 	import { Image } from './Image';
-	import { getContext, onMount } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { css, cx } from 'styled-system/css';
 
@@ -65,6 +65,10 @@
 				content = editor.getJSON();
 			}
 		});
+	});
+	onDestroy(() => {
+		$editor.destroy();
+		$editor = null;
 	});
 </script>
 

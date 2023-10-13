@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import type { JSONContent } from '@tiptap/core';
+import { readable } from 'svelte/store';
 
 export const supabase = createClient(
 	'https://veesqakrutpzcryhdhrx.supabase.co',
@@ -65,3 +66,26 @@ export async function updatePage({
 		// Handle success
 	}
 }
+
+type User = {
+	name: string;
+	email: string;
+	avatar: string;
+} | null;
+
+export const user = readable<User>(null, (set) => {
+	const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+		if (session?.user) {
+			set({
+				name: session.user.user_metadata.name || '',
+				email: session.user.email || '',
+				avatar: session.user.user_metadata.avatar_url
+			});
+		} else {
+			set(null);
+		}
+	});
+	return () => {
+		authListener.subscription.unsubscribe();
+	};
+});

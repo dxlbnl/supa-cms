@@ -17,7 +17,7 @@
 	};
 </script>
 
-<Button disabled={saving} class={css({ colorPalette: 'green', ml: 8 })} on:click={handleSave}>
+<Button disabled={saving} class={css({ colorPalette: 'green' })} on:click={handleSave}>
 	{#if saving}
 		<CircleDotDashed
 			class={css({

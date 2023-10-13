@@ -8,9 +8,8 @@
 		}
 	}
 
-	console.log('HOI');
 	window.handleSignInWithGoogle = async function handleSignInWithGoogle(response: any) {
-		const { data, error } = await supabase.auth.signInWithIdToken({
+		await supabase.auth.signInWithIdToken({
 			provider: 'google',
 			token: response.credential
 		});
