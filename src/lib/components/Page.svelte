@@ -8,7 +8,7 @@
 	import Menu from '$lib/editor/Menu.svelte';
 	import { css } from 'styled-system/css';
 	import type { JSONContent, Editor as TEditor } from '@tiptap/core';
-	import { updatePage } from '$lib/supabaseClient';
+	import { supabase, updatePage } from '$lib/supabaseClient';
 
 	let editor: Writable<TEditor>;
 
@@ -16,7 +16,10 @@
 	export let content: JSONContent;
 
 	$: {
-		console.log({ slug, content });
+		(async () => {
+			const { data, error } = await supabase.auth.getSession();
+			console.log({ data, error });
+		})();
 	}
 </script>
 

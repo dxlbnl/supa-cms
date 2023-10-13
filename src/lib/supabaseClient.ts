@@ -29,8 +29,6 @@ export async function uploadImage(file: File) {
 
 export async function fetchPage(slug: string) {
 	const { data } = await supabase.from('page').select('*').match({ slug }).single();
-	console.log('Fetch', slug, data);
-
 	return data;
 }
 

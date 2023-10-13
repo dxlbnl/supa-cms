@@ -1,1 +1,10 @@
 @layer reset, base, tokens, recipes, utilities;
+
+@keyframes rotate {
+	0% {
+		transform: rotate(-45deg);
+	}
+	100% {
+		transform: rotate(45deg);
+	}
+}

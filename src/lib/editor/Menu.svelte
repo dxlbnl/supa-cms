@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import { updatePage, uploadImage } from '$lib/supabaseClient';
+	import { uploadImage } from '$lib/supabaseClient';
 	import type { Editor } from '@tiptap/core';
 	import { fly } from 'svelte/transition';
 
@@ -22,12 +22,8 @@
 		Heading2,
 		Heading3,
 		Heading4,
-		Heading5,
-		Heading6,
 		Check,
-		AlignJustify,
-		ChevronDown,
-		Save
+		ChevronDown
 	} from 'lucide-svelte';
 	import { css, cx } from 'styled-system/css';
 
@@ -35,6 +31,7 @@
 	import { type SvelteComponent, getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { page } from '$app/stores';
+	import Save from './menu/Save.svelte';
 
 	let cls: string | undefined = undefined;
 	export { cls as class };
@@ -87,10 +84,6 @@
 		// const previewUrl = URL.createObjectURL(blob);
 		$editor.chain().focus().setImage({ src: url }).run();
 	};
-	const handleSave = async () => {
-		updatePage({ slug: $page.params.slug || 'index', content: $editor.getJSON() });
-	};
-
 	const {
 		elements: { trigger, menu, option, label },
 		states: { selected, open },
@@ -129,6 +122,7 @@
 	$: if ($editor && !listener) {
 		listener = true;
 		$editor.on('selectionUpdate', onSelectionUpdate);
+		$editor.on('update', onSelectionUpdate);
 	}
 </script>
 
@@ -280,6 +274,6 @@
 			<Image />
 		</Button>
 
-		<Button class={css({ colorPalette: 'green', ml: 8 })} on:click={handleSave}><Save /></Button>
+		<Save />
 	</section>
 {/if}
