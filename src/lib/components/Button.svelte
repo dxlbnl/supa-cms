@@ -1,34 +1,77 @@
 <script lang="ts" context="module">
-	import { css, cx } from 'styled-system/css';
-	export const styles = css({
-		display: 'flex',
-		colorPalette: 'gray',
-		'&[data-active="true"]': {
-			colorPalette: 'blue'
+	import { CircleDotDashed } from 'lucide-svelte';
+	import { css, cva, cx } from 'styled-system/css';
+
+	const button = cva({
+		base: {
+			display: 'flex',
+			background: 'colorPalette.200',
+			rounded: 'sm',
+			padding: 1,
+			_hover: {
+				background: 'colorPalette.300'
+			},
+			_focus: {
+				outlineColor: 'colorPalette.400',
+				outlineStyle: 'solid',
+				outlineWidth: '3px'
+			}
 		},
-		background: 'colorPalette.200',
-		_hover: {
-			background: 'colorPalette.300'
+		variants: {
+			states: {
+				initial: {
+					colorPalette: 'gray'
+				},
+				active: {
+					colorPalette: 'blue'
+				}
+			}
 		},
-		_focus: {
-			outlineColor: 'colorPalette.400',
-			outlineStyle: 'solid',
-			outlineWidth: '3px'
-		},
-		rounded: '.5em',
-		padding: 1
+		defaultVariants: {
+			states: 'initial'
+		}
 	});
 </script>
 
 <script lang="ts">
-	import { token } from 'styled-system/tokens';
+	import type { SystemProperties } from 'styled-system/types';
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
 	let className: string | undefined = undefined;
-	export { className as class };
 
+	export let action: (() => void | Promise<void>) | undefined = undefined;
+	export { className as class };
+	export let color: SystemProperties['colorPalette'] = undefined;
 	export let active: boolean = false;
+	export let disabled: boolean = false;
+
+	let loading = false;
 </script>
 
-<button {...$$props} on:click data-active={active} class={cx(className, styles)}>
+<button
+	{...$$props}
+	disabled={disabled || loading}
+	on:click={async () => {
+		loading = true;
+		await action?.();
+		await dispatch('click');
+		loading = false;
+	}}
+	class={cx(
+		css({ colorPalette: color }),
+		className,
+		button({ states: (active && 'active') || undefined })
+	)}
+>
+	{#if loading}
+		<CircleDotDashed
+			class={css({
+				animation: 'rotate 2s infinite'
+			})}
+		/>
+	{:else}
+		<slot name="icon" />
+	{/if}
 	<slot />
 </button>

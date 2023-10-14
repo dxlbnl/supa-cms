@@ -1,61 +1,26 @@
 <script lang="ts">
 	import StarterKit from '@tiptap/starter-kit';
-	import { Node, Editor, mergeAttributes, type Content } from '@tiptap/core';
-	import { Image } from './Image';
-	import { getContext, onDestroy, onMount } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { Editor, type Content } from '@tiptap/core';
+
+	import { Image } from './extensions/image';
+	import { Section } from './extensions/section';
+	import { Layout } from './extensions/layout';
+	import { Link } from './extensions/link';
+
+	import { onDestroy, onMount } from 'svelte';
 	import { css, cx } from 'styled-system/css';
+	import { getEditor } from './EditorContext.svelte';
 
 	export let content: Content;
 
-	const editor = getContext<Writable<Editor>>('editor');
-
-	const Section = Node.create({
-		name: 'section',
-
-		content: 'block*',
-		isolating: true,
-
-		group: 'block',
-
-		renderHTML: () => ['section', 0],
-
-		parseHTML: () => [
-			{
-				tag: 'section'
-			}
-		]
-	});
-
-	const Layout = Node.create({
-		name: 'layout',
-
-		content: 'image section',
-
-		group: 'block',
-
-		renderHTML: ({ HTMLAttributes }) => {
-			return [
-				'div',
-				mergeAttributes(HTMLAttributes, {
-					class: 'layout'
-				}),
-				0
-			];
-		},
-		parseHTML: () => [
-			{
-				tag: 'div.layout'
-			}
-		]
-	});
+	const editor = getEditor();
 
 	let element: HTMLDivElement;
 
 	onMount(() => {
 		$editor = new Editor({
 			element: element,
-			extensions: [Image, Section, Layout, StarterKit],
+			extensions: [StarterKit, Image, Section, Layout, Link],
 			content,
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
@@ -67,7 +32,7 @@
 		});
 	});
 	onDestroy(() => {
-		$editor.destroy();
+		$editor?.destroy();
 		$editor = null;
 	});
 </script>

@@ -29,12 +29,18 @@ dependencies:
   '@tiptap/extension-image':
     specifier: ^2.1.12
     version: 2.1.12(@tiptap/core@2.1.12)
+  '@tiptap/extension-link':
+    specifier: ^2.1.12
+    version: 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
   '@tiptap/extension-paragraph':
     specifier: ^2.1.12
     version: 2.1.12(@tiptap/core@2.1.12)
   '@tiptap/extension-text':
     specifier: ^2.1.12
     version: 2.1.12(@tiptap/core@2.1.12)
+  '@tiptap/pm':
+    specifier: ^2.1.12
+    version: 2.1.12
   '@tiptap/starter-kit':
     specifier: ^2.1.12
     version: 2.1.12(@tiptap/pm@2.1.12)
@@ -59,6 +65,9 @@ dependencies:
   svelte-sequential-preprocessor:
     specifier: ^2.0.1
     version: 2.0.1
+  tippy.js:
+    specifier: ^6.3.7
+    version: 6.3.7
 
 devDependencies:
   '@melt-ui/svelte':
@@ -1369,6 +1378,10 @@ packages:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
     dev: true
 
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
   /@remirror/core-constants@2.0.2:
     resolution: {integrity: sha512-dyHY+sMF0ihPus3O27ODd4+agdHMEmuRdyiZJ2CCWjPV5UFmn17ZbElvk6WOGVE4rdCJKZQCrPV2BcikOMLUGQ==}
     dev: false
@@ -1659,6 +1672,17 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
+    dev: false
+
+  /@tiptap/extension-link@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
+    resolution: {integrity: sha512-Sti5hhlkCqi5vzdQjU/gbmr8kb578p+u0J4kWS+SSz3BknNThEm/7Id67qdjBTOQbwuN07lHjDaabJL0hSkzGQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
+      '@tiptap/pm': 2.1.12
+      linkifyjs: 4.1.1
     dev: false
 
   /@tiptap/extension-list-item@2.1.12(@tiptap/core@2.1.12):
@@ -4445,6 +4469,10 @@ packages:
       uc.micro: 1.0.6
     dev: false
 
+  /linkifyjs@4.1.1:
+    resolution: {integrity: sha512-zFN/CTVmbcVef+WaDXT63dNzzkfRBKT1j464NJQkV7iSgJU0sLBus9W0HBwnXK13/hf168pbrx/V/bjEHOXNHA==}
+    dev: false
+
   /load-yaml-file@0.2.0:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
     engines: {node: '>=6'}
@@ -6419,6 +6447,12 @@ packages:
       globalyzer: 0.1.0
       globrex: 0.1.2
     dev: true
+
+  /tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.8
+    dev: false
 
   /titleize@3.0.0:
     resolution: {integrity: sha512-KxVu8EYHDPBdUYdKZdKtU2aj2XfEx9AfjXxE/Aj0vT06w2icA09Vus1rh6eSu1y01akYg6BjIK/hxyLJINoMLQ==}

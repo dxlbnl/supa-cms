@@ -51,6 +51,12 @@
     justify-content: center
     }
 
+  a {
+    color: var(--colors-blue-500);
+    text-decoration: underline;
+    cursor: pointer
+    }
+
   h1,h2,h3,h4,h5,h6 {
     font-family: Alfa Slab One;
     font-weight: 500;

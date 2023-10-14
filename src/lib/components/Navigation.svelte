@@ -24,6 +24,10 @@
 		color: 'gray.400',
 		'& li[data-active=true]': {
 			color: 'gray.900'
+		},
+		'& a': {
+			color: 'inherit',
+			textDecorationLine: 'none'
 		}
 	});
 </script>

@@ -43,6 +43,11 @@ const globalCss = defineGlobalStyles({
 		display: 'flex',
 		justifyContent: 'center'
 	},
+	a: {
+		color: 'blue.500',
+		textDecoration: 'underline',
+		cursor: 'pointer'
+	},
 	'h1,h2,h3,h4,h5,h6': {
 		textStyle: 'heading',
 		margin: '.5rem 0'

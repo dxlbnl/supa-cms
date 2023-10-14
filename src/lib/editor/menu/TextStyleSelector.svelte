@@ -7,11 +7,10 @@
 	import { css, cx } from 'styled-system/css';
 
 	import { hstack, vstack } from 'styled-system/patterns';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import type { Editor } from '@tiptap/core';
+	import { getEditor } from '../EditorContext.svelte';
 
-	const editor = getContext<Writable<Editor>>('editor');
+	const editor = getEditor();
 
 	const textOptions = ['p', 'h1', 'h2', 'h3', 'h4'] as const;
 	type TextOption = (typeof textOptions)[number];

@@ -5,7 +5,7 @@
 
 	import Editor from '$lib/editor/Editor.svelte';
 	import EditorContext from '$lib/editor/EditorContext.svelte';
-	import Menu from '$lib/editor/Menu.svelte';
+	import Menu from '$lib/editor/menu/Menu.svelte';
 	import type { JSONContent, Editor as TEditor } from '@tiptap/core';
 	import { user, supabase } from '$lib/supabaseClient';
 

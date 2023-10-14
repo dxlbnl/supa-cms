@@ -1,30 +1,16 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import { css } from 'styled-system/css';
-	import { CircleDotDashed, Save } from 'lucide-svelte';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
-	import type { Editor } from '@tiptap/core';
+	import { Save } from 'lucide-svelte';
 	import { updatePage } from '$lib/supabaseClient';
 	import { page } from '$app/stores';
+	import { getEditor } from '../EditorContext.svelte';
 
-	const editor = getContext<Writable<Editor>>('editor');
-	let saving = false;
+	const editor = getEditor();
 	const handleSave = async () => {
-		saving = true;
-		await updatePage({ slug: $page.params.slug || 'index', content: $editor.getJSON() });
-		saving = false;
+		await updatePage({ slug: $page.params.slug || 'index', content: $editor?.getJSON() || {} });
 	};
 </script>
 
-<Button disabled={saving} class={css({ colorPalette: 'green' })} on:click={handleSave}>
-	{#if saving}
-		<CircleDotDashed
-			class={css({
-				animation: 'rotate 2s infinite'
-			})}
-		/>
-	{:else}
-		<Save />
-	{/if}
+<Button color="green" action={handleSave}>
+	<Save slot="icon" />
 </Button>

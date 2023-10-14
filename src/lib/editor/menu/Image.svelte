@@ -1,14 +1,12 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { uploadImage } from '$lib/supabaseClient';
-	import type { Editor } from '@tiptap/core';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 
 	import { Image } from 'lucide-svelte';
+	import { getEditor } from '../EditorContext.svelte';
 
 	let imageInput: HTMLInputElement;
-	const editor = getContext<Writable<Editor>>('editor');
+	const editor = getEditor();
 
 	const handleImage = async (event: Event) => {
 		const target = event.target as HTMLInputElement;
@@ -18,7 +16,7 @@
 
 		// const blob = new Blob([target.files[0]]);
 		// const previewUrl = URL.createObjectURL(blob);
-		$editor.chain().focus().setImage({ src: url }).run();
+		$editor?.chain().focus().setImage({ src: url }).run();
 	};
 </script>
 
@@ -28,7 +26,7 @@
 		type="file"
 		accept="image/*"
 		on:change={handleImage}
-		disabled={!$editor.can().chain().focus().setImage({ src: '/image.jpg' }).run()}
+		disabled={!$editor?.can().chain().focus().setImage({ src: '/image.jpg' }).run()}
 		style:display="none"
 	/>
 	<Image />
