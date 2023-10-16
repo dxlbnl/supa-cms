@@ -1,12 +1,41 @@
 <script lang="ts">
 	import type { Editor } from '@tiptap/core';
-	import { fade } from 'svelte/transition';
+	import { css } from 'styled-system/css';
+	import type { LinkProps } from '.';
+	import { Check } from 'lucide-svelte';
+	import Button from '$lib/components/Button.svelte';
 
-	export let attrs: Record<string, string>;
 	export let editor: Editor;
-	export let getPos: () => number;
+	export let linkProps: LinkProps;
+	export let hide: () => void;
+
+	let input: HTMLInputElement;
+	const handleChange = (e) => {
+		console.log('Set', e.target.value);
+		const { pos, node } = linkProps;
+
+		editor
+			.chain()
+			.setTextSelection({
+				from: pos,
+				to: pos + node.textContent.length
+			})
+			.extendMarkRange('link')
+			.updateAttributes('link', {
+				href: input.value
+			})
+			.run();
+	};
 </script>
 
-<div transition:fade={{ duration: 100 }}>
-	<p>Add item to library</p>
-</div>
+<input
+	bind:this={input}
+	type="text"
+	on:input={handleChange}
+	value={linkProps.mark.attrs.href}
+	class={css({
+		background: 'white',
+		rounded: 'md',
+		p: 1
+	})}
+/>

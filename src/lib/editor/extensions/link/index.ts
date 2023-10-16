@@ -5,6 +5,7 @@ import tippy, { type Instance, type Props } from 'tippy.js';
 import type { EditorView } from '@tiptap/pm/view';
 import type { Mark, Node } from '@tiptap/pm/model';
 import { Plugin, PluginKey, type PluginView, type EditorState } from '@tiptap/pm/state';
+import type { Editor } from '@tiptap/core';
 
 export type LinkProps = {
 	pos: number;
@@ -17,6 +18,15 @@ class TooltipView implements PluginView {
 	component: LinkView | null = null;
 	content: HTMLDivElement | null = null;
 	popup: Instance<Props> | null = null;
+
+	constructor(
+		readonly view: EditorView,
+		readonly editor: Editor
+	) {
+		editor.on('blur', () => {
+			this.hide();
+		});
+	}
 
 	clean() {
 		if (this.popup) {
@@ -37,11 +47,12 @@ class TooltipView implements PluginView {
 
 		this.component ||= new LinkView({
 			target: this.content,
-			props: { linkProps, editor: this.editor, onHide: () => this.hide() }
+			props: { linkProps, editor: this.editor, hide: () => this.hide() }
 		});
 
 		this.popup ||= tippy('body', {
-			offset: [0, -10],
+			offset: [0, -2],
+			placement: 'bottom',
 			getReferenceClientRect: () => linkProps.dom.getBoundingClientRect(),
 			content: this.content,
 			appendTo: () => document.body,
@@ -79,11 +90,12 @@ export const Link = BaseLink.extend({
 	},
 	addProseMirrorPlugins() {
 		let pluginView: TooltipView;
+		const editor = this.editor;
 		return [
 			new Plugin({
 				key: new PluginKey('tooltip'),
-				view: () => {
-					pluginView = new TooltipView();
+				view: (view) => {
+					pluginView = new TooltipView(view, editor);
 					return pluginView;
 				},
 				props: {

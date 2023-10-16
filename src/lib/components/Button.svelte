@@ -59,9 +59,9 @@
 		loading = false;
 	}}
 	class={cx(
-		css({ colorPalette: color }),
 		className,
-		button({ states: (active && 'active') || undefined })
+		button({ states: (active && 'active') || undefined }),
+		css({ colorPalette: color })
 	)}
 >
 	{#if loading}

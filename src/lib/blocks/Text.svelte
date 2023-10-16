@@ -4,7 +4,8 @@
 	const markMapping = {
 		italic: 'em',
 		bold: 'strong',
-		strike: 's'
+		strike: 's',
+		link: 'a'
 	};
 
 	const isMarkType = (type?: string): type is keyof typeof markMapping =>

@@ -12,5 +12,11 @@
 
 - Mooi editor menu
 - Menu configuratie
+
   - Menu structuur in DB
   - DnD nested menu editor
+
+- Links
+  - Autosubmit
+  - Focus on open
+  - Copy selection if link
