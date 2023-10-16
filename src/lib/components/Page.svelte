@@ -8,12 +8,17 @@
 	import Menu from '$lib/editor/menu/Menu.svelte';
 	import type { JSONContent, Editor as TEditor } from '@tiptap/core';
 	import { user } from '$lib/supabaseClient';
+	import Meta from './Meta.svelte';
+	import type { PageMeta } from '$schema';
 
 	let editable = writable(false);
 
 	export let slug: string;
 	export let content: JSONContent;
+	export let meta: PageMeta;
 </script>
+
+<Meta {meta} {editable} />
 
 <EditorContext>
 	<Menu {editable} />

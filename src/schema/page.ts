@@ -11,5 +11,5 @@ export const page = pgTable('page', {
 	slug: varchar('slug').primaryKey(),
 	title: varchar('title'),
 	content: jsonb('content').$type<JSONContent>(),
-	meta: jsonb('meta').$type<PageMeta>()
+	meta: jsonb('meta').$type<PageMeta>().notNull().default({ title: '', description: '' })
 });

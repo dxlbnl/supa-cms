@@ -107,6 +107,10 @@
     margin-left: 1rem
     }
 
+  input {
+    border-radius: var(--radii-md)
+    }
+
   pre, code {
     font-family: Inconsolata;
     font-size: .7rem

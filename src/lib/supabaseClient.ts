@@ -50,6 +50,24 @@ export async function createPage(slug: string) {
 	}
 }
 
+export async function updatePageMeta({
+	slug,
+	meta
+}: {
+	slug: string;
+	meta: Record<string, string>;
+}) {
+	const { error } = await supabase.from('page').update({ meta, title: meta.title }).match({ slug });
+
+	if (error) {
+		// Handle error
+		console.error('error updating page meta', error);
+		throw error;
+	} else {
+		console.log('page meta updated', slug, meta);
+		// Handle success
+	}
+}
 export async function updatePage({
 	slug,
 	title,

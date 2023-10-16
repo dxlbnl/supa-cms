@@ -28,6 +28,9 @@
 		'& a': {
 			color: 'inherit',
 			textDecorationLine: 'none'
+		},
+		'& ul': {
+			listStyle: 'none'
 		}
 	});
 </script>

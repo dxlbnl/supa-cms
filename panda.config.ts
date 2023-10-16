@@ -83,6 +83,10 @@ const globalCss = defineGlobalStyles({
 		marginLeft: '1rem'
 	},
 
+	input: {
+		rounded: 'md'
+	},
+
 	'pre, code': {
 		textStyle: 'code'
 	},

@@ -20,3 +20,11 @@
   - Autosubmit
   - Focus on open
   - Copy selection if link
+
+## image optimization
+
+imagemin
+
+What formats / sizes
+
+- Thumbnail
