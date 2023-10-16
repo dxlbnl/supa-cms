@@ -102,7 +102,7 @@
     font-size: 1rem
     }
 
-  .content ul {
+  ul {
     list-style: disc;
     margin-left: 1rem
     }
@@ -118,10 +118,12 @@
     grid-gap: 1em
     }
 
-  button {
-    background-color: var(--colors-gray-300);
-    border-radius: var(--radii-md);
-    padding: var(--spacing-2);
-    margin-block: var(--spacing-2)
+  blockquote {
+    background: var(--colors-gray-100);
+    padding-left: var(--spacing-8)
+    }
+
+  p:empty {
+    height: var(--sizes-6)
     }
 }

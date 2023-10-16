@@ -15,10 +15,4 @@
 	export const editor = editorStore;
 </script>
 
-<slot name="editor" />
-
-{#if !$editor}
-	<slot name="content" />
-{/if}
-
 <slot />

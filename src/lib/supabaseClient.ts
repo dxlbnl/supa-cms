@@ -29,7 +29,11 @@ export async function uploadImage(file: File) {
 }
 
 export async function fetchPage(slug: string) {
-	const { data } = await supabase.from('page').select('*').match({ slug }).single();
+	const { data, error } = await supabase.from('page').select('*').match({ slug }).single();
+	if (error) {
+		console.error(error);
+		throw error;
+	}
 	return data;
 }
 

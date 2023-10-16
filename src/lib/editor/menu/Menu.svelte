@@ -11,7 +11,8 @@
 		Undo2,
 		Redo2,
 		CornerDownLeft,
-		LogOut
+		LogOut,
+		FileEdit
 	} from 'lucide-svelte';
 	import { css, cx } from 'styled-system/css';
 
@@ -22,34 +23,38 @@
 	import { supabase, user } from '$lib/supabaseClient';
 	import { getEditor } from '../EditorContext.svelte';
 	import Link from './Link.svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import { fly } from 'svelte/transition';
 
 	let cls: string | undefined = undefined;
 	export { cls as class };
+	export let editable: Writable<boolean> = writable(false);
 
 	const editor = getEditor();
 </script>
 
-{#if $editor}
-	<section
-		class={cx(
-			cls,
-			grid({
-				gridAutoColumns: 'minmax(32px, min-content)',
-				gridAutoFlow: 'column dense',
-				justifyContent: 'center'
-			}),
-			css({
-				minWidth: 'fit-content',
-				overflowX: 'auto',
-				position: 'fixed',
-				top: 0,
-				left: 0,
-				bg: 'white',
-				zIndex: 10,
-				w: '100%'
-			})
-		)}
-	>
+<section
+	class={cx(
+		cls,
+		grid({
+			gridAutoColumns: 'minmax(32px, min-content)',
+			gridAutoFlow: 'column dense',
+			justifyContent: 'end'
+		}),
+		css({
+			minWidth: 'fit-content',
+			overflowX: 'auto',
+			position: 'fixed',
+			top: 0,
+			left: 0,
+			bg: 'white',
+			zIndex: 10,
+			w: '100%',
+			p: 2
+		})
+	)}
+>
+	{#if $editor && $editable}
 		<TextStyleSelector />
 		<Button
 			on:click={() => $editor?.chain().focus().toggleBold().run()}
@@ -110,9 +115,17 @@
 		<Link />
 		<Image />
 
-		<Save />
+		<Save {editable} />
+	{/if}
+	{#if !$editable}
+		<Button on:click={() => ($editable = true)}>
+			<FileEdit />
+		</Button>
+	{/if}
 
+	{#if $user}
 		<Button
+			style="height: 32px; overflow: hidden"
 			on:click={async () => {
 				await supabase.auth.signOut();
 				console.log('LoggedOut?');
@@ -123,5 +136,5 @@
 			{/if}
 			<LogOut />
 		</Button>
-	</section>
-{/if}
+	{/if}
+</section>

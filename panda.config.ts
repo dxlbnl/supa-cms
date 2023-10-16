@@ -78,7 +78,7 @@ const globalCss = defineGlobalStyles({
 		fontWeight: '300'
 	},
 
-	'.content ul': {
+	ul: {
 		listStyle: 'disc',
 		marginLeft: '1rem'
 	},
@@ -93,11 +93,12 @@ const globalCss = defineGlobalStyles({
 		gridGap: '1em'
 	},
 
-	button: {
-		backgroundColor: 'gray.300',
-		rounded: 'md',
-		p: 2,
-		my: 2
+	blockquote: {
+		bg: 'gray.100',
+		pl: 8
+	},
+	'p:empty': {
+		height: 6
 	}
 });
 
