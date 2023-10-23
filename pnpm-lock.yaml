@@ -50,6 +50,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.28.6
     version: 0.28.6(pg@8.11.3)(postgres@3.4.0)
+  drizzle-zod:
+    specifier: ^0.5.1
+    version: 0.5.1(drizzle-orm@0.28.6)(zod@3.22.4)
   eslint-plugin-simple-import-sort:
     specifier: ^10.0.0
     version: 10.0.0(eslint@8.51.0)
@@ -4011,6 +4014,16 @@ packages:
     dependencies:
       pg: 8.11.3
       postgres: 3.4.0
+    dev: false
+
+  /drizzle-zod@0.5.1(drizzle-orm@0.28.6)(zod@3.22.4):
+    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+      zod: '*'
+    dependencies:
+      drizzle-orm: 0.28.6(pg@8.11.3)(postgres@3.4.0)
+      zod: 3.22.4
     dev: false
 
   /dset@3.1.2:
@@ -8914,7 +8927,6 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
-    dev: true
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}

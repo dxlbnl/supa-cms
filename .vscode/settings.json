@@ -3,5 +3,7 @@
 	"deno.lint": true,
 	"deno.unstable": true,
 	"deno.enablePaths": ["./supabase/functions"],
-  "deno.importMap": "./supabase/functions/import_map.json"
+  "deno.importMap": "./supabase/functions/import_map.json",
+  "editor.renderLineHighlightOnlyWhenFocus": true,
+  "editor.tabFocusMode": false
 }

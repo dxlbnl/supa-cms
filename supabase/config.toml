@@ -64,7 +64,8 @@ enabled = true
 file_size_limit = "50MiB"
 
 [functions]
-hello-image.verify_jwt = false
+new-image.verify_jwt = false
+process-image.verify_jwt = false
 
 [auth]
 enabled = true
