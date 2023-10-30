@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
 
 	console.log('Creating image record for ', record.name);
 
-	const { error } = await supabase.from('image').insert({
+	const { error } = await supabase.from('images').insert({
 		hash: record.id,
 		name: record.name,
 		srcset: [
