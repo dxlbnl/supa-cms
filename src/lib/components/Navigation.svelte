@@ -18,7 +18,9 @@
 		{
 			name: 'Contact',
 			url: '/contact'
-		}
+		},
+		{ name: 'Login', url: '/login' },
+		{ name: 'Images', url: '/images' }
 	];
 	const styles = css({
 		color: 'gray.400',

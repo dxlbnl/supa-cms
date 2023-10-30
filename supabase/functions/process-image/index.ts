@@ -26,6 +26,7 @@ type Image = {
 
 const processImage = (image: Image, buffer: Uint8Array) =>
 	ImageMagick.read(buffer, async (img: IMagickImage) => {
+		console.log('Read image', [img.format, img.label]);
 		for (const { width, name } of image.srcset) {
 			console.log('Resizing image');
 			img.resize(width, img.height);
@@ -34,14 +35,17 @@ const processImage = (image: Image, buffer: Uint8Array) =>
 			console.log('Saving image/webp');
 			await img.write(MagickFormat.Webp, (data: Uint8Array) =>
 				supabase.storage.from('media').upload(`processed/${image.hash}/${name}.webp`, data, {
-					contentType: 'image/webp'
+					contentType: 'image/webp',
+					upsert: true
 				})
 			);
+			await supabase.from('image').update({ srcset: image.srcset }).match({ hash: image.hash });
 
 			console.log('Saving image/jpeg');
 			await img.write(MagickFormat.Jpeg, (data: Uint8Array) =>
 				supabase.storage.from('media').upload(`processed/${image.hash}/${name}.jpeg`, data, {
-					contentType: 'image/jpeg'
+					contentType: 'image/jpeg',
+					upsert: true
 				})
 			);
 			console.log(`Done with ${name} at ${width}x${img.height}`);

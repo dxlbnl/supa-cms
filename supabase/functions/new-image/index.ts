@@ -37,6 +37,10 @@ Deno.serve(async (req) => {
 		return new Response('Not processing');
 	}
 
+	if (!/\.jpe?g/i.test(record.name)) {
+		return new Response('Not processing');
+	}
+
 	console.log('Creating image record for ', record.name);
 
 	const { error } = await supabase.from('image').insert({
