@@ -8,9 +8,9 @@ type SrcSet = { width: number; name: string, ready: boolean }[];
 
 export const image = pgTable('images', {
 	hash: uuid('hash').primaryKey(),
-	name: varchar('name'),
-	srcset: jsonb('srcset').$type<SrcSet>(),
+	name: varchar('name').notNull(),
+	srcset: jsonb('srcset').$type<SrcSet>().default([]).notNull(),
 	meta: jsonb('meta').$type<any>(),
-  createdAt: timestamp('created_at').default('now()'),
+  createdAt: timestamp('created_at').defaultNow()
 });
 export type Image = typeof image.$inferSelect;

@@ -37,8 +37,8 @@ Deno.serve(async (req) => {
 		return new Response('Not processing');
 	}
 
-	if (!/\.jpe?g/i.test(record.name)) {
-		return new Response('Not processing');
+	if (!/\.jpe?g|\.png/i.test(record.name)) {
+		return new Response('Not processing', { status: 400 });
 	}
 
 	console.log('Creating image record for ', record.name);
