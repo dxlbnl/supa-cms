@@ -11,7 +11,13 @@ dependencies:
   '@fontsource/alfa-slab-one':
     specifier: ^5.0.17
     version: 5.0.17
+  '@fontsource/bellota':
+    specifier: ^5.0.8
+    version: 5.0.8
   '@fontsource/inconsolata':
+    specifier: ^5.0.15
+    version: 5.0.15
+  '@fontsource/raleway':
     specifier: ^5.0.15
     version: 5.0.15
   '@melt-ui/pp':
@@ -1054,8 +1060,16 @@ packages:
     resolution: {integrity: sha512-WRA0ihxpyPZbAJ70iHXlO/zIGWp7JnVXjSyS12ZbyQOktn/Iv5Lx62c53+erI4DmlNtJmw3PnHWsW4kb+YjgGQ==}
     dev: false
 
+  /@fontsource/bellota@5.0.8:
+    resolution: {integrity: sha512-lLJ2VQL3hKfD/2myxkOAdTJw5/w8rZDmXK+pmxkM6Lspbjb/sfCx4cSZuJAd1nTpK7mtYkEVWbJ2UHcIVwY5jA==}
+    dev: false
+
   /@fontsource/inconsolata@5.0.15:
     resolution: {integrity: sha512-xqFvxBMaYvRSwam5oc7ofc80yvEMkYgrPOpqS9WL+FKTp0jEHCwYaWxHmyJyFcuDcKwo3EnrsAm000L3vS+vMw==}
+    dev: false
+
+  /@fontsource/raleway@5.0.15:
+    resolution: {integrity: sha512-L1QfDwgBESrR55qYCQasxb2tONFhyiTsf07E5EZLH5vWL968GKXZu6fE+yk2uiOATVBzgY5QJTJ+HEmu/pJbuA==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:

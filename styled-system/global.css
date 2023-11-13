@@ -1,133 +1,141 @@
 @layer base {
-  :root {
-    --made-with-panda: '🐼'
+    :root {
+        --made-with-panda: '🐼';
     }
-
-  *, *::before, *::after, ::backdrop {
-    --blur:   ;
-    --brightness:   ;
-    --contrast:   ;
-    --grayscale:   ;
-    --hue-rotate:   ;
-    --invert:   ;
-    --saturate:   ;
-    --sepia:   ;
-    --drop-shadow:   ;
-    --backdrop-blur:   ;
-    --backdrop-brightness:   ;
-    --backdrop-contrast:   ;
-    --backdrop-grayscale:   ;
-    --backdrop-hue-rotate:   ;
-    --backdrop-invert:   ;
-    --backdrop-opacity:   ;
-    --backdrop-saturate:   ;
-    --backdrop-sepia:   ;
-    --scroll-snap-strictness: proximity;
-    --border-spacing-x: 0;
-    --border-spacing-y: 0;
-    --translate-x: 0;
-    --translate-y: 0;
-    --rotate: 0;
-    --skew-x: 0;
-    --skew-y: 0;
-    --scale-x: 1;
-    --scale-y: 1
+    *, *::before, *::after, ::backdrop {
+        --blur:   ;
+        --brightness:   ;
+        --contrast:   ;
+        --grayscale:   ;
+        --hue-rotate:   ;
+        --invert:   ;
+        --saturate:   ;
+        --sepia:   ;
+        --drop-shadow:   ;
+        --backdrop-blur:   ;
+        --backdrop-brightness:   ;
+        --backdrop-contrast:   ;
+        --backdrop-grayscale:   ;
+        --backdrop-hue-rotate:   ;
+        --backdrop-invert:   ;
+        --backdrop-opacity:   ;
+        --backdrop-saturate:   ;
+        --backdrop-sepia:   ;
+        --scroll-snap-strictness: proximity;
+        --border-spacing-x: 0;
+        --border-spacing-y: 0;
+        --translate-x: 0;
+        --translate-y: 0;
+        --rotate: 0;
+        --skew-x: 0;
+        --skew-y: 0;
+        --scale-x: 1;
+        --scale-y: 1;
     }
-
-  html, body {
-    font-family: Open Sans Variable;
-    font-weight: 500;
-    font-size: 16;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-decoration: None;
-    text-transform: None;
-    color: var(--colors-gray-900);
-    background-color: var(--colors-gray-100)
+}
+@layer base {
+    html, body {
+        font-family: Raleway;
+        font-weight: 500;
+        font-size: 16;
+        line-height: 1.5;
+        letter-spacing: 0;
+        text-decoration: None;
+        text-transform: None;
+        color: var(--colors-gray-900);
+        background-color: var(--colors-gray-100);
     }
-
-  body {
-    display: flex;
-    justify-content: center
+    .content {
+        --gap: clamp(1rem, 6vw, 3rem);
+        --full: minmax(var(--gap), 1fr);
+        --content: min(50ch, 100% - var(--gap) * 2);
+        --popout: minmax(0, 2rem);
+        --feature: minmax(0, 5rem);
+        display: grid;
+        grid-template-columns: [full-start] var(--full)
+			[feature-start] var(--feature)
+			[popout-start] var(--popout)
+			[content-start] var(--content) [content-end]
+			var(--popout) [popout-end]
+			var(--feature) [feature-end]
+			var(--full) [full-end];
     }
-
-  a {
-    color: var(--colors-blue-500);
-    text-decoration: underline;
-    cursor: pointer
+    .content > * {
+        grid-column: content;
     }
-
-  h1,h2,h3,h4,h5,h6 {
-    font-family: Alfa Slab One;
-    font-weight: 500;
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    letter-spacing: 0;
-    text-decoration: None;
-    text-transform: None;
-    margin: .5rem 0
+    .content .popout {
+        grid-column: popout;
     }
-
-  h1 {
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    font-weight: 900
+    .content .feature {
+        grid-column: feature;
     }
-
-  h2 {
-    font-size: 2rem
+    .content .full {
+        grid-column: 1 / -1;
     }
-
-  h2,h3 {
-    font-weight: 700
+    body {
+        display: grid;
     }
-
-  h3 {
-    font-size: 1.5rem
+    a {
+        color: var(--colors-blue-500);
+        text-decoration: underline;
+        cursor: pointer;
     }
-
-  h4 {
-    font-weight: 500
+    h1,h2,h3,h4,h5,h6 {
+        font-family: Bellota;
+        font-weight: 400;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        letter-spacing: 0;
+        text-decoration: None;
+        text-transform: None;
+        margin: .5rem 0;
     }
-
-  h4,h5 {
-    font-size: 1.2rem
+    h1 {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        font-weight: 700;
     }
-
-  h5,h6 {
-    font-weight: 300
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
     }
-
-  h6 {
-    font-size: 1rem
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
     }
-
-  ul {
-    list-style: disc;
-    margin-left: 1rem
+    h4 {
+        font-size: 1.2rem;
+        font-weight: 500;
     }
-
-  input {
-    border-radius: var(--radii-md)
+    h5 {
+        font-size: 1.2rem;
+        font-weight: 300;
     }
-
-  pre, code {
-    font-family: Inconsolata;
-    font-size: .7rem
+    h6 {
+        font-size: 1rem;
+        font-weight: 300;
     }
-
-  .layout {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1em
+    ul {
+        list-style: disc;
+        margin-left: 1rem;
     }
-
-  blockquote {
-    background: var(--colors-gray-100);
-    padding-left: var(--spacing-8)
+    input {
+        border-radius: var(--radii-md);
     }
-
-  p:empty {
-    height: var(--sizes-6)
+    pre, code {
+        font-family: Inconsolata;
+        font-size: .7rem;
+    }
+    .layout {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1em;
+    }
+    blockquote {
+        background: var(--colors-gray-100);
+        padding-left: var(--spacing-8);
+    }
+    p:empty {
+        height: var(--sizes-6);
     }
 }

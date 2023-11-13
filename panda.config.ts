@@ -4,7 +4,7 @@ const textStyles = defineTextStyles({
 	body: {
 		description: 'The body text style - used in paragraphs',
 		value: {
-			fontFamily: 'Open Sans Variable',
+			fontFamily: 'Raleway',
 			fontWeight: '500',
 			fontSize: '16',
 			lineHeight: '24',
@@ -15,8 +15,8 @@ const textStyles = defineTextStyles({
 	},
 	heading: {
 		value: {
-			fontFamily: 'Alfa Slab One',
-			fontWeight: '500',
+			fontFamily: 'Bellota',
+			fontWeight: '400',
 			fontSize: '1.5rem',
 			lineHeight: '1.5rem',
 			letterSpacing: '0',
@@ -39,9 +39,39 @@ const globalCss = defineGlobalStyles({
 		backgroundColor: 'gray.100',
 		lineHeight: '1.5'
 	},
+	'.content': {
+		'--gap': 'clamp(1rem, 6vw, 3rem)',
+		'--full': 'minmax(var(--gap), 1fr)',
+		'--content': 'min(50ch, 100% - var(--gap) * 2)',
+		'--popout': 'minmax(0, 2rem)',
+		'--feature': 'minmax(0, 5rem)',
+
+		display: 'grid',
+		gridTemplateColumns: `
+			[full-start] var(--full)
+			[feature-start] var(--feature)
+			[popout-start] var(--popout)
+			[content-start] var(--content) [content-end]
+			var(--popout) [popout-end]
+			var(--feature) [feature-end]
+			var(--full) [full-end]`,
+
+		'> *': {
+			gridColumn: 'content'
+		},
+
+		'.popout': {
+			gridColumn: 'popout'
+		},
+		'.feature': {
+			gridColumn: 'feature'
+		},
+		'.full': {
+			gridColumn: 'full'
+		}
+	},
 	body: {
-		display: 'flex',
-		justifyContent: 'center'
+		display: 'grid'
 	},
 	a: {
 		color: 'blue.500',
@@ -55,7 +85,7 @@ const globalCss = defineGlobalStyles({
 	h1: {
 		fontSize: '2.5rem',
 		lineHeight: '2.5rem',
-		fontWeight: '900'
+		fontWeight: '700'
 	},
 	h2: {
 		fontSize: '2rem',
@@ -109,6 +139,8 @@ const globalCss = defineGlobalStyles({
 export default defineConfig({
 	// Whether to use css reset
 	preflight: true,
+	optimize: false,
+	minimize: false,
 
 	// Where to look for your css declarations
 	include: ['./src/**/*.{js,ts,svelte}'],
