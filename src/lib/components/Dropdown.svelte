@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ChevronDown, ChevronUp } from 'lucide-svelte';
 	import Button from './Button.svelte';
-	import { css } from 'styled-system/css';
 
 	export let items: string[];
 
@@ -10,14 +9,6 @@
 
 <section>
 	<Button
-		class={css({
-			'& button': {
-				display: 'none',
-				_active: {
-					display: 'initial'
-				}
-			}
-		})}
 		on:click={() => {
 			open = !open;
 		}}
@@ -35,3 +26,13 @@
 		{/each}
 	{/if}
 </section>
+
+<style>
+	section > :global(button) {
+		display: none;
+
+		.active {
+			display: initial;
+		}
+	}
+</style>

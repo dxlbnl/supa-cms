@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { css } from 'styled-system/css';
 
 	const menu = [
 		{
@@ -22,22 +21,9 @@
 		{ name: 'Login', url: '/login' },
 		{ name: 'Images', url: '/images' }
 	];
-	const styles = css({
-		color: 'gray.400',
-		'& li[data-active=true]': {
-			color: 'gray.900'
-		},
-		'& a': {
-			color: 'inherit',
-			textDecorationLine: 'none'
-		},
-		'& ul': {
-			listStyle: 'none'
-		}
-	});
 </script>
 
-<nav class={styles}>
+<nav>
 	<ul>
 		{#each menu as item}
 			<li data-active={$page.url.pathname === item.url}>
@@ -46,3 +32,22 @@
 		{/each}
 	</ul>
 </nav>
+
+<style>
+	nav {
+		color: var(--gray-400);
+
+		& li.active {
+			color: var(--gray-900);
+		}
+
+		& a {
+			color: inherit;
+			text-decoration-line: none;
+		}
+
+		& ul {
+			list-style: none;
+		}
+	}
+</style>

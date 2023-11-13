@@ -15,9 +15,7 @@
 		FileEdit,
 		X
 	} from 'lucide-svelte';
-	import { css, cx } from 'styled-system/css';
 
-	import { grid } from 'styled-system/patterns';
 	import Save from './Save.svelte';
 	import Image from './Image.svelte';
 	import TextStyleSelector from './TextStyleSelector.svelte';
@@ -32,42 +30,12 @@
 	export let editable: Writable<boolean> = writable(false);
 
 	const editor = getEditor();
-	const toolbarStyles = grid({
-		gridAutoColumns: 'minmax(32px, min-content)',
-		gridAutoFlow: 'column dense',
-		justifyContent: 'end'
-	});
 </script>
 
 {#if $user}
-	<section
-		class={cx(
-			cls,
-			css({
-				overflowX: 'auto',
-				position: 'fixed',
-				top: 0,
-				left: 0,
-				bg: 'white',
-				zIndex: 10,
-				w: '100%',
-				p: 2,
-
-				display: 'flex',
-				flexFlow: 'row nowrap',
-				justifyContent: 'center'
-			})
-		)}
-	>
-		<container
-			class={css({
-				flexBasis: '50rem',
-				display: 'flex',
-				flexFlow: 'row nowrap',
-				justifyContent: 'space-between'
-			})}
-		>
-			<section class={toolbarStyles} transition:fade>
+	<section class="{cls} menu">
+		<container>
+			<section class="toolbar" transition:fade>
 				{#if $editor && $editable}
 					<TextStyleSelector />
 					<Button
@@ -133,7 +101,7 @@
 				{/if}
 			</section>
 
-			<section class={toolbarStyles}>
+			<section class="toolbar">
 				<Button on:click={() => ($editable = !$editable)}>
 					{#if !$editable}
 						<FileEdit />
@@ -158,3 +126,34 @@
 		</container>
 	</section>
 {/if}
+
+<style>
+	.menu {
+		overflow-x: auto;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: white;
+		z-index: 10;
+		width: 100%;
+		padding: 0.5rem;
+
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+
+		container {
+			flex-basis: 50rem;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+		}
+	}
+
+	.toolbar {
+		display: grid;
+		grid-auto-columns: minmax(32px, min-content);
+		grid-auto-flow: column dense;
+		justify-content: end;
+	}
+</style>

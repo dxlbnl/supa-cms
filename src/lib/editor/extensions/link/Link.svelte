@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Editor } from '@tiptap/core';
-	import { css } from 'styled-system/css';
 	import type { LinkProps } from '.';
 	import { Check } from 'lucide-svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -28,14 +27,12 @@
 	};
 </script>
 
-<input
-	bind:this={input}
-	type="text"
-	on:input={handleChange}
-	value={linkProps.mark.attrs.href}
-	class={css({
-		background: 'white',
-		rounded: 'md',
-		p: 1
-	})}
-/>
+<input bind:this={input} type="text" on:input={handleChange} value={linkProps.mark.attrs.href} />
+
+<style>
+	input {
+		background: white;
+		border-radius: var(--rounded);
+		padding: 1rem;
+	}
+</style>

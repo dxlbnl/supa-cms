@@ -2,7 +2,6 @@
 
 ## Docs
 
-- https://panda-css.com/docs
 - https://tiptap.dev/api/
 - https://supabase.com/dashboard
 - https://www.melt-ui.com/docs

@@ -1,40 +1,8 @@
 <script lang="ts" context="module">
 	import { CircleDotDashed } from 'lucide-svelte';
-	import { css, cva, cx } from 'styled-system/css';
-
-	const button = cva({
-		base: {
-			display: 'flex',
-			background: 'colorPalette.200',
-			rounded: 'sm',
-			padding: 1,
-			_hover: {
-				background: 'colorPalette.300'
-			},
-			_focus: {
-				outlineColor: 'colorPalette.400',
-				outlineStyle: 'solid',
-				outlineWidth: '3px'
-			}
-		},
-		variants: {
-			states: {
-				initial: {
-					colorPalette: 'gray'
-				},
-				active: {
-					colorPalette: 'blue'
-				}
-			}
-		},
-		defaultVariants: {
-			states: 'initial'
-		}
-	});
 </script>
 
 <script lang="ts">
-	import type { SystemProperties } from 'styled-system/types';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -42,7 +10,7 @@
 
 	export let action: (() => void | Promise<void>) | undefined = undefined;
 	export { className as class };
-	export let color: SystemProperties['colorPalette'] = undefined;
+
 	export let active: boolean = false;
 	export let disabled: boolean = false;
 
@@ -58,20 +26,38 @@
 		await dispatch('click');
 		loading = false;
 	}}
-	class={cx(
-		className,
-		button({ states: (active && 'active') || undefined }),
-		css({ colorPalette: color })
-	)}
+	class:active
 >
 	{#if loading}
-		<CircleDotDashed
-			class={css({
-				animation: 'rotate 2s infinite'
-			})}
-		/>
+		<CircleDotDashed />
 	{:else}
 		<slot name="icon" />
 	{/if}
 	<slot />
 </button>
+
+<style>
+	button {
+		--_background: var(--button-background, --gray-200);
+		--_hover: var(--button-hover, --gray-300);
+		--_outline: var(--button-outline, --gray-400);
+
+		display: flex;
+		background: var(--_background);
+		border-radius: var(--rounded);
+		padding: 1rem;
+
+		&:hover {
+			background: var(--_hover);
+		}
+		&:focus {
+			outline-color: var(--_outline);
+			outline-style: solid;
+			outline-width: 3px;
+		}
+
+		& > :global(svg) {
+			animation: rotate 2s infinite;
+		}
+	}
+</style>

@@ -5,7 +5,6 @@
 	import { page } from '$app/stores';
 	import { getEditor } from '../EditorContext.svelte';
 	import type { Writable } from 'svelte/store';
-	import { css } from 'styled-system/css';
 
 	export let editable: Writable<boolean>;
 	const editor = getEditor();
@@ -15,6 +14,14 @@
 	};
 </script>
 
-<Button style={css({ colorPalette: 'green' })} action={handleSave}>
+<Button action={handleSave}>
 	<Save slot="icon" />
 </Button>
+
+<style>
+	:root {
+		--button-background: var(--green-200);
+		--button-hover: var(--green-300);
+		--button-outline: var(--green-400);
+	}
+</style>

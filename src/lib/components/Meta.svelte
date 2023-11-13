@@ -2,21 +2,11 @@
 	import { page } from '$app/stores';
 	import { updatePageMeta } from '$lib/supabaseClient';
 	import type { PageMeta } from '$schema';
-	import { css } from 'styled-system/css';
 	import type { Writable } from 'svelte/store';
 	import Button from './Button.svelte';
 
 	export let meta: PageMeta = {} as PageMeta;
 	export let editable: Writable<boolean>;
-
-	const labelStyles = css({
-		mb: 0.5,
-		fontSize: 'sm'
-	});
-	const fieldStyles = css({
-		ml: 8,
-		p: 2
-	});
 </script>
 
 {#if $editable}
@@ -28,21 +18,21 @@
 	>
 		<section>
 			<div>
-				<label class={labelStyles}>
+				<label>
 					<p>Title:</p>
-					<input class={fieldStyles} type="text" bind:value={meta.title} />
+					<input type="text" bind:value={meta.title} />
 				</label>
 			</div>
 			<div>
-				<label class={labelStyles}>
+				<label>
 					<p>Description:</p>
-					<textarea class={fieldStyles} bind:value={meta.description} />
+					<textarea bind:value={meta.description} />
 				</label>
 			</div>
 			<div>
-				<label class={labelStyles}>
+				<label>
 					<p>Image:</p>
-					<input class={fieldStyles} type="text" bind:value={meta.title} />
+					<input type="text" bind:value={meta.title} />
 				</label>
 			</div>
 		</section>

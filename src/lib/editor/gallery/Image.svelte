@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { css, cx } from 'styled-system/css';
 	import { X } from 'lucide-svelte';
 	import type { Image } from '$schema';
 	import { supabase } from '$lib/supabaseClient';
@@ -36,50 +35,44 @@
 			.join(', ');
 </script>
 
-<section
-	class={css({
-		position: 'relative',
-		width: 128,
-		height: 128,
-
-		_hover: {
-			'& .actions': {
-				display: 'flex'
-			}
-		}
-	})}
->
-	<section
-		class={cx(
-			'actions',
-			css({
-				position: 'absolute',
-				top: 0,
-				left: 0,
-				display: 'none'
-			})
-		)}
-	>
+<section class="image">
+	<section class="actions">
 		<button disabled={deleting} on:click={deleteImage}><X /></button>
 	</section>
-	<img
-		class={css({
-			height: '100%',
-			width: '100%',
-			objectFit: 'cover',
-			objectPosition: 'center'
-		})}
-		alt={filename}
-		src={getSrc(image, 'thumbnail')}
-		srcset={getSrcSet(image, 'thumbnail')}
-	/>
-	<span
-		class={css({
-			position: 'absolute',
-			left: 0,
-			bottom: 0,
-			width: '100%',
-			background: 'rgba(255,255,255,0.5)'
-		})}>{filename}</span
-	>
+	<img alt={filename} src={getSrc(image, 'thumbnail')} srcset={getSrcSet(image)} />
+	<span>{filename}</span>
 </section>
+
+<style>
+	.image {
+		position: relative;
+		width: 128px;
+		height: 128px;
+
+		&:hover .actions {
+			display: flex;
+		}
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		span {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			background: rgba(255, 255, 255, 0.5);
+		}
+	}
+
+	.actions {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+</style>

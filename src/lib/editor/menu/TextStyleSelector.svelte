@@ -4,9 +4,7 @@
 	import { createSelect, melt } from '@melt-ui/svelte';
 
 	import { Text, Heading1, Heading2, Heading3, Heading4, Check, ChevronDown } from 'lucide-svelte';
-	import { css, cx } from 'styled-system/css';
 
-	import { hstack, vstack } from 'styled-system/patterns';
 	import type { Editor } from '@tiptap/core';
 	import { getEditor } from '../EditorContext.svelte';
 
@@ -61,7 +59,7 @@
 		onSelectedChange({ curr, next }) {
 			if (shouldReact && next) {
 				const nextOption = textConfig[next.value];
-				$editor.chain().focus().setNode(nextOption.type, nextOption.attrs).run();
+				$editor?.chain().focus().setNode(nextOption.type, nextOption.attrs).run();
 			}
 
 			return next;
@@ -89,67 +87,67 @@
 </script>
 
 <section>
-	<button
-		class={cx(
-			hstack({ gap: 0 }),
-			css({
-				p: 1
-			})
-		)}
-		use:melt={$trigger}
-	>
+	<button use:melt={$trigger}>
 		<ChevronDown />
 		<svelte:component this={textConfig[$selected?.value || 'p'].icon} />
 	</button>
 
 	{#if $open}
-		<ul
-			use:melt={$menu}
-			transition:fly
-			class={cx(
-				vstack({ gap: 1 }),
-				css({
-					zIndex: 20,
-					p: 1,
-					bg: 'white'
-				})
-			)}
-		>
+		<ul use:melt={$menu} transition:fly>
 			{#each textOptions as item}
 				{@const config = textConfig[item]}
-				<li
-					use:melt={$option({ value: item })}
-					class={cx(
-						hstack({ gap: 0 }),
-						css({
-							position: 'relative',
-							rounded: 'md',
-							bg: 'gray.100',
-							p: 1,
-							pl: 6,
-							'&[data-highlighted]': {
-								bg: 'gray.200'
-							},
-							'&[data-selected]': {
-								bg: 'gray.300'
-							}
-						})
-					)}
-				>
+				<li use:melt={$option({ value: item })}>
 					{#if $isSelected(item)}
-						<Check
-							size={16}
-							class={css({
-								position: 'absolute',
-								left: 1,
-								top: '50%',
-								zIndex: 20,
-								translate: '0 calc(-50% + 1px)'
-							})}
-						/>
+						<Check size={16} />
 					{/if}
 					<svelte:component this={config.icon} />
 				</li>{/each}
 		</ul>
 	{/if}
 </section>
+
+<style>
+	button {
+		display: flex;
+		flex-direction: row;
+		gap: 0;
+
+		padding: 0.5rem;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+
+		z-index: 20;
+		padding: 0.5rem;
+		background-color: white;
+
+		li {
+			display: flex;
+			flex-direction: row;
+			gap: 0;
+
+			position: relative;
+			border-radius: var(--radius);
+			background-color: var(--gray-100);
+			padding: 0.5rem;
+			padding-left: 3rem;
+
+			[data-highlighted] {
+				background-color: var(--gray-200);
+			}
+			[data-selected] {
+				background-color: var(--gray-300);
+			}
+
+			:global(svg) {
+				position: absolute;
+				left: 0.5rem;
+				top: 50%;
+				z-index: 20;
+				transform: 0 calc(-50% + 1px);
+			}
+		}
+	}
+</style>

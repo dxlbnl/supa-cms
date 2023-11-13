@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Editor } from '@tiptap/core';
 	import { Image } from 'lucide-svelte';
-	import { css } from 'styled-system/css';
 	import { uploadImage } from '$lib/supabaseClient';
 
 	export let attrs: Record<string, string>;
@@ -37,15 +36,7 @@
 	};
 </script>
 
-<button
-	class={css({
-		'&.ProseMirror-selectednode': {
-			outline: '2px solid #3B82F6',
-			outlineOffset: '2px'
-		}
-	})}
-	on:click={() => input.click()}
->
+<button on:click={() => input.click()}>
 	{#if src}
 		<img {src} {alt} {...otherattrs} />
 	{:else}
@@ -60,3 +51,10 @@
 		class={css({ display: 'none' })}
 	/>
 </button>
+
+<style>
+	button :global(.ProseMirror-selectednode) {
+		outline: 2px solid #3b82f6;
+		outline-offset: 2px;
+	}
+</style>

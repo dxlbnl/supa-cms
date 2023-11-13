@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
 	import type { Image as TImage } from '$schema';
-	import { css, cx } from 'styled-system/css';
-	import { grid } from 'styled-system/patterns';
 	import { onMount } from 'svelte';
 
 	import Image from './Image.svelte';
@@ -14,6 +12,9 @@
 	let loading: boolean;
 	let uploading: boolean;
 	let images: TImage[] | null = null;
+
+	let dragActive = false;
+	let dragOver = false;
 
 	const fetchData = async () => {
 		loading = true;
@@ -46,8 +47,8 @@
 	});
 
 	const handleDrop = async (e: DragEvent) => {
-		delete dropzone.dataset.dragactive;
-		delete dropzone.dataset.dragover;
+		dragActive = false;
+		dragOver = false;
 
 		if (!hasFile(e.dataTransfer)) return;
 
@@ -66,72 +67,36 @@
 
 <svelte:document
 	on:drop|preventDefault|stopPropagation={() => {
-		delete dropzone.dataset.dragactive;
-		delete dropzone.dataset.dragover;
+		dragActive = false;
+		dragOver = false;
 	}}
 	on:dragover|preventDefault|stopPropagation={(e) => {
 		if (!hasFile(e.dataTransfer)) return;
-		dropzone.dataset.dragactive = 'true';
+		dragActive = true;
 	}}
 	on:dragleave|preventDefault|stopPropagation={() => {
-		delete dropzone.dataset.dragactive;
+		dragActive = false;
 	}}
 />
 
 <div
+	class="gallery"
+	class:dragOver
+	class:dragActive
 	bind:this={dropzone}
 	role="input"
-	class={cx(
-		grid({
-			gridTemplateColumns: 'repeat(auto-fill, minmax(128px, 1fr))',
-			gridTemplateRows: 'repeat(auto-fill, minmax(128px, 1fr))',
-			gap: 1
-		}),
-		css({
-			position: 'relative',
-			outlineWidth: 2,
-			outlineStyle: 'dashed',
-			outlineColor: 'transparent',
-			'&[data-dragactive]': {
-				outlineColor: 'gray.300',
-				'&:after': {
-					content: '"Drop files here"',
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					right: 0,
-					bottom: 0,
-					pointerEvents: 'none',
-					background: 'orange.100',
-					textAlign: 'center',
-					lineHeight: '100%'
-				},
-
-				'&[data-dragover]': {
-					outlineColor: 'gray.600',
-					'&:after': {
-						background: 'green.200'
-					}
-				}
-			}
-		})
-	)}
 	on:drop|preventDefault|stopPropagation={handleDrop}
 	on:dragover|preventDefault|stopPropagation={(e) => {
 		if (!hasFile(e.dataTransfer)) return;
 
-		dropzone.dataset.dragover = 'true';
-		dropzone.dataset.dragactive = 'true';
+		dragOver = true;
+		dragActive = true;
 	}}
 	on:dragleave={() => {
-		delete dropzone.dataset.dragover;
+		dragOver = false;
 	}}
 >
-	<div
-		class={css({
-			gridColumn: '1 / -1'
-		})}
-	>
+	<div>
 		{#if loading}
 			<p>loading...</p>
 		{/if}
@@ -148,3 +113,46 @@
 		{/each}
 	{/if}
 </div>
+
+<style>
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+		grid-template-rows: repeat(auto-fill, minmax(128px, 1fr));
+		gap: 1;
+
+		position: relative;
+		outline-width: 2px;
+		outline-style: dashed;
+		outline-color: transparent;
+
+		& > div {
+			grid-column: 1 / -1;
+		}
+
+		&.dragActive {
+			outline-color: var(--gray-300);
+
+			&:after {
+				content: 'Drop files here';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				pointer-events: none;
+				background: var(--orange-300);
+				text-align: center;
+				line-height: 100%;
+			}
+
+			&.dragOver {
+				outline-color: var(--gray-600);
+
+				&:after {
+					background: var(--green-200);
+				}
+			}
+		}
+	}
+</style>

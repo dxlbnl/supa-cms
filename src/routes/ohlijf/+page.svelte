@@ -1,60 +1,15 @@
-<script>
-	import { css } from 'styled-system/css';
-	import { grid } from 'styled-system/patterns';
-</script>
-
-<header
-	class={grid({
-		gridTemplateAreas: '"stack"',
-
-		'& > *': {
-			gridArea: 'stack'
-		}
-	})}
->
+<header>
 	<img width="100%" src="swing-on-the-campuhan-ridge-walk-ubud 3.png" alt="swinging" />
 	<p class="tagline">Een lichter leven zonder pijn</p>
 	<section>
 		<button>Ontdek onze methode</button>
 	</section>
 
-	<section
-		class={css({
-			background:
-				'linear-gradient(117deg, rgba(0, 0, 0, 0.58) 15.34%, rgba(0, 0, 0, 0.42) 43.12%, rgba(58, 128, 51, 0.00) 74.85%)'
-		})}
-	/>
+	<section class="darken" />
 
-	<nav
-		class={grid({
-			gridTemplateColumns: '1fr 1fr',
-			height: '6rem'
-		})}
-	>
-		<a
-			href="/ohlijf"
-			class={css({
-				display: 'flex',
-				color: '#FFE5D6',
-				fontSize: '4.6rem',
-				textDecoration: 'none'
-			})}>OhLijf <img src="logo.svg" alt="OhLijf logo" /></a
-		>
-		<ul
-			class={grid({
-				gridTemplateColumns: 'repeat(5, 1fr)',
-				justifyItems: 'center',
-				listStyle: 'none',
-
-				color: 'white',
-				fontSize: '1.5rem',
-				fontWeight: '600',
-
-				'& > *': {
-					whiteSpace: 'nowrap'
-				}
-			})}
-		>
+	<nav>
+		<a href="/ohlijf">OhLijf <img src="logo.svg" alt="OhLijf logo" /></a>
+		<ul>
 			<li>Artikelen</li>
 			<li>Ons verhaal</li>
 			<li>Word beter</li>
@@ -99,3 +54,51 @@
 		</defs>
 	</svg>
 </main>
+
+<style>
+	header {
+		display: grid;
+		grid-template-areas: 'stack';
+
+		& > * {
+			grid-area: stack;
+		}
+
+		& .darken {
+			background: linear-gradient(
+				117deg,
+				rgba(0, 0, 0, 0.58) 15.34%,
+				rgba(0, 0, 0, 0.42) 43.12%,
+				rgba(58, 128, 51, 0) 74.85%
+			);
+		}
+
+		& nav {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			height: 6rem;
+
+			& > a {
+				display: flex;
+				color: #ffe5d6;
+				font-size: 4.6rem;
+				text-decoration: none;
+			}
+
+			& ul {
+				display: grid;
+				grid-template-columns: repeat(5 1fr);
+				justify-items: center;
+				list-style: none;
+
+				color: white;
+				font-size: 1.5rem;
+				font-weight: 600;
+
+				& > * {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+</style>

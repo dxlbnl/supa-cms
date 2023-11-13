@@ -10,7 +10,6 @@
       "$lib/*":["./src/lib/*"],
       "$schema": ["./src/schema"],
       "$schema/*": ["./src/schema/*"],
-      "styled-system/*": ["./styled-system/*"]
     },
 		"resolveJsonModule": true,
 		"skipLibCheck": true,

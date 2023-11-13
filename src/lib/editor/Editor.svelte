@@ -8,7 +8,6 @@
 	import { Link } from './extensions/link';
 
 	import { onDestroy, onMount } from 'svelte';
-	import { css, cx } from 'styled-system/css';
 	import { getEditor } from './EditorContext.svelte';
 
 	export let content: Content;
@@ -37,27 +36,24 @@
 	});
 </script>
 
-<div
-	class={cx(
-		'content',
-		css({
-			'& .ProseMirror': {
-				rounded: 'md',
-				m: -2,
-				p: 2,
-				'&.ProseMirror-focused': {
-					outlineColor: 'gray.200',
-					outlineWidth: '1',
-					outlineStyle: 'solid',
-					bg: 'white'
-				},
-				_hover: {
-					outlineColor: 'gray.200',
-					outlineWidth: '1',
-					outlineStyle: 'solid'
-				}
-			}
-		})
-	)}
-	bind:this={element}
-/>
+<div class="content" bind:this={element} />
+
+<style>
+	.content :global(.ProseMirror) {
+		border-radius: var(--rounded);
+		margin: -2rem;
+		padding: 2rem;
+
+		&.ProseMirror-focused {
+			outline-color: var(--gray-200);
+			outline-width: 1px;
+			outline-style: solid;
+			background: white;
+		}
+		&:hover {
+			outline-color: var(--gray-200);
+			outline-width: 1px;
+			outline-style: solid;
+		}
+	}
+</style>

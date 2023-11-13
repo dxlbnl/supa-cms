@@ -15,7 +15,6 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$schema: './src/schema',
-			'styled-system': './styled-system/*'
 		}
 	}
 };

@@ -12,12 +12,10 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"generate": "drizzle-kit generate:pg",
 		"push": "drizzle-kit push:pg",
-		"studio": "drizzle-kit studio",
-		"prepare": "panda codegen"
+		"studio": "drizzle-kit studio"
 	},
 	"devDependencies": {
 		"@melt-ui/svelte": "^0.55.4",
-		"@pandacss/dev": "^0.15.5",
 		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/kit": "^1.27.1",
 		"@typescript-eslint/eslint-plugin": "^6.9.0",
