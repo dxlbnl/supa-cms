@@ -53,14 +53,14 @@
 			display: flex;
 		}
 
-		img {
+		& img {
 			height: 100%;
 			width: 100%;
 			object-fit: cover;
 			object-position: center;
 		}
 
-		span {
+		& span {
 			position: absolute;
 			left: 0;
 			bottom: 0;

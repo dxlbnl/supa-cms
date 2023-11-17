@@ -123,7 +123,7 @@
 		padding: 0.5rem;
 		background-color: white;
 
-		li {
+		& li {
 			display: flex;
 			flex-direction: row;
 			gap: 0;
@@ -134,14 +134,14 @@
 			padding: 0.5rem;
 			padding-left: 3rem;
 
-			[data-highlighted] {
+			& [data-highlighted] {
 				background-color: var(--gray-200);
 			}
-			[data-selected] {
+			& [data-selected] {
 				background-color: var(--gray-300);
 			}
 
-			:global(svg) {
+			& :global(svg) {
 				position: absolute;
 				left: 0.5rem;
 				top: 50%;

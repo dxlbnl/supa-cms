@@ -31,7 +31,7 @@
 
 		align-self: start;
 
-		h1 {
+		& h1 {
 			margin-bottom: 2rem;
 		}
 	}

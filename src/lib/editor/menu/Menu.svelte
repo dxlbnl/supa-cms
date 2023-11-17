@@ -142,7 +142,7 @@
 		flex-flow: row nowrap;
 		justify-content: center;
 
-		container {
+		& container {
 			flex-basis: 50rem;
 			display: flex;
 			flex-flow: row nowrap;
