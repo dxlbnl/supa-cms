@@ -1,8 +1,10 @@
-html,
-body {
+:root {
 	font-family: 'Raleway', sans-serif;
 	font-size: 16px;
 	line-height: 1.5;
+
+	--green: #3a8033;
+	--white: white;
 
 	--gray-50: #f7fafc;
 	--gray-100: #edf2f7;
@@ -16,6 +18,25 @@ body {
 	--gray-900: #171923;
 
 	--rounded: 0.25rem;
+}
+
+* {
+	box-sizing: border-box;
+} /* Switch to border-box for box-sizing. */
+
+body {
+	margin: 0; /* Remove the tiny space around the edge of the page */
+}
+
+img,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+	display: block; /* Switch display mode to block, since that's what we usually want for images. */
+	vertical-align: middle; /* If you override, and make an image inline, it's likely you'll want middle vertical alignment. */
 }
 
 h1,
