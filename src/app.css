@@ -5,6 +5,8 @@
 
 	--green: #3a8033;
 	--white: white;
+	--black: black;
+	--yellow: #ffd500;
 
 	--gray-50: #f7fafc;
 	--gray-100: #edf2f7;
@@ -45,7 +47,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'Bellota', sans-serif;
+	font-family: 'Fira Sans', sans-serif;
 }
 
 img {
@@ -70,7 +72,7 @@ img {
 .content {
 	--gap: clamp(1rem, 6vw, 3rem);
 	--full: minmax(var(--gap), 1fr);
-	--content: min(50ch, 100% - var(--gap) * 2);
+	--content: min(80ch, 100% - var(--gap) * 2);
 	--popout: minmax(0, 2rem);
 	--feature: minmax(0, 5rem);
 
@@ -83,6 +85,8 @@ img {
 		var(--popout) [popout-end]
 		var(--feature) [feature-end]
 		var(--full) [full-end];
+
+	grid-auto-rows: min-content;
 
 	& > * {
 		grid-column: content;
@@ -97,4 +101,21 @@ img {
 	& .full {
 		grid-column: full;
 	}
+}
+
+button.cta {
+	padding: 0.5rem 1rem;
+
+	font-style: italic;
+
+	background: var(--yellow);
+	border-radius: 0.8rem;
+	border: 3px solid var(--black);
+	box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.35);
+}
+
+.columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-gap: 1rem;
 }
