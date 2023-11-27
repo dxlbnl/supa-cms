@@ -9,23 +9,30 @@
 
 <style>
 	header {
-		display: grid;
-		grid-template-areas: 'stack';
-		aspect-ratio: 16/8;
-		height: auto;
+		position: relative;
+		/* display: grid; */
+		/* grid-template-areas: 'stack'; */
+		/* aspect-ratio: 16/8; */
+		/* height: auto; */
 		min-height: min-content;
 		overflow: hidden;
 
-		& > * {
+		/* & > * {
 			grid-area: stack;
-		}
+		} */
 
 		& > img {
+			position: absolute;
+			inset: 0;
 			object-fit: cover;
 			object-position: center;
+			z-index: -5;
 		}
 
 		& .darken {
+			position: absolute;
+			inset: 0;
+			z-index: -4;
 			background: linear-gradient(
 				117deg,
 				rgba(0, 0, 0, 0.58) 15.34%,
@@ -36,13 +43,16 @@
 	}
 
 	.content {
+		border: thin solid teal;
 		color: white;
 		justify-items: start;
+
+		padding-block: 4rem 1rem;
 
 		& > h1 {
 			font-size: 4rem;
 			line-height: 5rem;
-			margin-block: 4rem 1rem;
+			margin-block: 1rem;
 		}
 	}
 </style>

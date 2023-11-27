@@ -12,6 +12,6 @@
 
 <style>
 	main {
-		margin-top: -17vw;
+		/* margin-top: -17vw; */
 	}
 </style>
