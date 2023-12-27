@@ -2,7 +2,13 @@
 	export let position: 'top' | 'bottom';
 </script>
 
-<svg {...$$restProps} viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+	{...$$restProps}
+	viewBox="0 0 100 20"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+	preserveAspectRatio="none"
+>
 	{#if position === 'top'}
 		<path
 			class="bottom"
@@ -26,3 +32,11 @@
 		class="wave"
 	/>
 </svg>
+
+<style>
+	svg {
+		height: var(--wave-height, 10rem);
+		margin-top: calc(0px - var(--wave-height, 10rem));
+		width: 100vw;
+	}
+</style>

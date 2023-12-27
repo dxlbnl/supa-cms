@@ -1,5 +1,12 @@
 <header>
-	<img width="100%" src="swing-on-the-campuhan-ridge-walk-ubud 3.png" alt="swinging" />
+	<section class="background">
+		<img
+			class="background"
+			width="100%"
+			src="swing-on-the-campuhan-ridge-walk-ubud 3.png"
+			alt="swinging"
+		/>
+	</section>
 	<section class="darken" />
 
 	<section class="content">
@@ -9,28 +16,33 @@
 
 <style>
 	header {
-		position: relative;
-		/* display: grid; */
-		/* grid-template-areas: 'stack'; */
+		/* position: relative; */
+		display: grid;
+		grid-template-areas: 'stack';
 		/* aspect-ratio: 16/8; */
 		/* height: auto; */
 		min-height: min-content;
 		overflow: hidden;
 
-		/* & > * {
+		& > * {
 			grid-area: stack;
-		} */
+		}
 
-		& > img {
-			position: absolute;
-			inset: 0;
-			object-fit: cover;
-			object-position: center;
-			z-index: -5;
+		& > .background {
+			position: relative;
+			z-index: -10;
+
+			& > img {
+				position: absolute;
+				inset: 0;
+				object-fit: cover;
+				object-position: center;
+				height: 100%;
+				width: 100%;
+			}
 		}
 
 		& .darken {
-			position: absolute;
 			inset: 0;
 			z-index: -4;
 			background: linear-gradient(
@@ -47,7 +59,7 @@
 		color: white;
 		justify-items: start;
 
-		padding-block: 4rem 1rem;
+		padding-block: 4rem 11rem;
 
 		& > h1 {
 			font-size: 4rem;
