@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const page = await fetchPage(params.slug || 'index');
 
 	if (!page) {
-		throw error(404, 'Page not found');
+		error(404, 'Page not found');
 	}
 
 	return {
