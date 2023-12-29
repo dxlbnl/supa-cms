@@ -2,6 +2,7 @@
 	import Content from '$lib/components/Content.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
+	import WieZijnWij from '$lib/components/WijZijnWij.svelte';
 </script>
 
 <Navigation />
@@ -42,6 +43,15 @@
 	</section>
 </Content>
 
+<WieZijnWij />
+
+<section class="content">
+	<p>Download ons selfcare werkboek</p>
+	<button>Gratis download!</button>
+</section>
+
+<footer></footer>
+
 <style>
 	.frame {
 		background: var(--white);
@@ -49,5 +59,12 @@
 		border-radius: 25px;
 		overflow: hidden;
 		border: 3px var(--green) solid;
+
+		align-self: center;
+	}
+
+	footer {
+		height: 7rem;
+		background: #8bc385;
 	}
 </style>

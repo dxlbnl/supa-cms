@@ -4,6 +4,7 @@
 
 <svg
 	{...$$restProps}
+	class="pos-{position} {$$restProps.class}"
 	viewBox="0 0 100 20"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
@@ -35,8 +36,15 @@
 
 <style>
 	svg {
-		height: var(--wave-height, 10rem);
-		margin-top: calc(0px - var(--wave-height, 10rem));
+		height: var(--wave-height);
 		width: 100vw;
+		z-index: 1;
+	}
+
+	.pos-top {
+		margin-top: calc(0px - var(--wave-height));
+	}
+	.pos-bottom {
+		margin-bottom: calc(0px - var(--wave-height));
 	}
 </style>

@@ -43,6 +43,9 @@
 		padding: 0 4.5rem;
 		background: var(--white);
 
+		container-type: size;
+		container-name: nav;
+
 		& * {
 			color: var(--green);
 		}
@@ -61,7 +64,7 @@
 			font-size: 2.5rem;
 		}
 		& img {
-			height: 100%;
+			max-height: 4.5rem;
 		}
 	}
 
@@ -85,6 +88,16 @@
 		}
 		& a {
 			text-decoration: none;
+		}
+	}
+	@container nav (max-width: 800px) {
+		.logo h1 {
+			display: none;
+		}
+	}
+	@container nav (max-width: 700px) {
+		.logo {
+			display: none;
 		}
 	}
 </style>

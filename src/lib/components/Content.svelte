@@ -13,5 +13,6 @@
 <style>
 	main {
 		/* margin-top: -17vw; */
+		margin-bottom: var(--wave-height);
 	}
 </style>
