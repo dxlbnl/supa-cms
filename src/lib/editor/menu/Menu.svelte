@@ -33,7 +33,7 @@
 </script>
 
 {#if $user}
-	<section class="{cls} menu">
+	<section class="menu {cls ?? ''}">
 		<container>
 			<section class="toolbar" transition:fade>
 				{#if $editor && $editable}
@@ -130,12 +130,12 @@
 <style>
 	.menu {
 		overflow-x: auto;
-		position: fixed;
+		position: sticky;
 		top: 0;
-		left: 0;
 		background: white;
 		z-index: 10;
-		width: 100%;
+		/* width: 100%; */
+		justify-self: end;
 		padding: 0.5rem;
 
 		display: flex;

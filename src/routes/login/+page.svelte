@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import { browser } from '$app/environment';
 	import { supabase } from '$lib/supabaseClient';
 
 	declare global {
